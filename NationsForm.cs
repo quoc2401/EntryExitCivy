@@ -11,15 +11,12 @@ namespace EntryExitCivy
 {
     public partial class NationsForm : Form
     {
-        float firstWidth;
-        float firstHeight;
 
         public NationsForm()
         {
             InitializeComponent();
             MySqlUtils mysql = new MySqlUtils();
-            firstWidth = this.Size.Width;
-            firstHeight = this.Size.Height;
+            
         }
 
 
@@ -43,13 +40,13 @@ namespace EntryExitCivy
                 {
                     MySqlUtils.UpdateNation(changes);
                     ((DataTable)dgridNation.DataSource).AcceptChanges();
-                    MessageBox.Show("Cập nhật thành công");
+                    MessageBox.Show("Cập nhật thành công", "Inform");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cập nhật thất bại, chi tiết lỗi:\n" + ex.Message);
+                MessageBox.Show("Cập nhật thất bại, chi tiết lỗi:\n" + ex.Message, "Error");
             }
         }
 
@@ -65,20 +62,6 @@ namespace EntryExitCivy
             nextForm.ShowDialog();
             this.Close();
         }
-
-
-        private void NationsForm_Resize(object sender, EventArgs e)
-        {
-            float size1 = this.Size.Width / firstWidth;
-            float size2 = this.Size.Height / firstHeight;
-
-            SizeF scale = new SizeF(size1, size2);
-            firstWidth = this.Size.Width;
-            firstHeight = this.Size.Height;
-
-            dgridNation.Scale(scale);
-        }
-
 
     }
 }

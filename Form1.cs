@@ -12,6 +12,7 @@ namespace EntryExitCivy
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -20,21 +21,37 @@ namespace EntryExitCivy
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
+        private void miEntry_Click(object sender, EventArgs e)
         {
-            string test = txtTest.Text;
-            
-            try
-            {
-                MySqlUtils.AddTest(test);
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(text: ex.Message, caption: "Error");
-            } 
+            EntryForm nextForm = new EntryForm();
+            nextForm.Size = this.Size;
+            nextForm.Top = this.Top;
+            nextForm.Left = this.Left;
+            nextForm.WindowState = this.WindowState;
+            this.Hide();
+            nextForm.ShowDialog();
+            this.Close();
         }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            ExitForm nextForm = new ExitForm();
+            nextForm.Size = this.Size;
+            nextForm.Top = this.Top;
+            nextForm.Left = this.Left;
+            nextForm.WindowState = this.WindowState;
+            this.Hide();
+            nextForm.ShowDialog();
+            this.Close();
+        }
+
+        private void miNation_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
