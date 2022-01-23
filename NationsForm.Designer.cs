@@ -85,6 +85,9 @@
             // 
             // dgridNation
             // 
+            this.dgridNation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dgridNation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgridNation.Location = new System.Drawing.Point(11, 101);
             this.dgridNation.Margin = new System.Windows.Forms.Padding(0);
@@ -92,6 +95,7 @@
             this.dgridNation.RowTemplate.Height = 24;
             this.dgridNation.Size = new System.Drawing.Size(740, 348);
             this.dgridNation.TabIndex = 4;
+            this.dgridNation.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgridNation_DataBindingComplete);
             this.dgridNation.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgridNation_RowValidated);
             // 
             // NationsForm
@@ -104,9 +108,9 @@
             this.Controls.Add(this.mnFuncs);
             this.MainMenuStrip = this.mnFuncs;
             this.Name = "NationsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NationsForm";
             this.Load += new System.EventHandler(this.NationsForm_Load);
-            this.Resize += new System.EventHandler(this.NationsForm_Resize);
             this.mnFuncs.ResumeLayout(false);
             this.mnFuncs.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgridNation)).EndInit();

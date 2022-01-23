@@ -11,15 +11,11 @@ namespace EntryExitCivy
 {
     public partial class NationsForm : Form
     {
-        float firstWidth;
-        float firstHeight;
 
         public NationsForm()
         {
             InitializeComponent();
             MySqlUtils mysql = new MySqlUtils();
-            firstWidth = this.Size.Width;
-            firstHeight = this.Size.Height;
         }
 
 
@@ -57,26 +53,19 @@ namespace EntryExitCivy
         private void miNation_Click(object sender, EventArgs e)
         {
             NationsForm nextForm = new NationsForm();
-            nextForm.Size = this.Size;
-            nextForm.Top = this.Top;
-            nextForm.Left = this.Left;
+            nextForm.Size = this.Size;        
             nextForm.WindowState = this.WindowState;
             this.Hide();
             nextForm.ShowDialog();
+            nextForm.Top = this.Top;
+            nextForm.Left = this.Left;
             this.Close();
         }
 
 
-        private void NationsForm_Resize(object sender, EventArgs e)
+        private void dgridNation_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            float size1 = this.Size.Width / firstWidth;
-            float size2 = this.Size.Height / firstHeight;
-
-            SizeF scale = new SizeF(size1, size2);
-            firstWidth = this.Size.Width;
-            firstHeight = this.Size.Height;
-
-            dgridNation.Scale(scale);
+            dgridNation.ClearSelection();
         }
 
 
