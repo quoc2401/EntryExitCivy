@@ -16,6 +16,7 @@ namespace EntryExitCivy
         {
             InitializeComponent();
             MySqlUtils mysql = new MySqlUtils();
+            
         }
 
 
@@ -39,13 +40,13 @@ namespace EntryExitCivy
                 {
                     MySqlUtils.UpdateNation(changes);
                     ((DataTable)dgridNation.DataSource).AcceptChanges();
-                    MessageBox.Show("Cập nhật thành công");
+                    MessageBox.Show("Cập nhật thành công", "Inform");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cập nhật thất bại, chi tiết lỗi:\n" + ex.Message);
+                MessageBox.Show("Cập nhật thất bại, chi tiết lỗi:\n" + ex.Message, "Error");
             }
         }
 

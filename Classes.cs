@@ -41,7 +41,7 @@ namespace EntryExitCivy
         }
     }
 
-    enum purpose
+    public enum purpose
     { 
         LEARNING = 1,
         WORKING = 2,

@@ -10,51 +10,15 @@ using MySql.Data.MySqlClient;
 
 namespace EntryExitCivy
 {
-    public partial class EntryForm : Form
+    public partial class ExitForm : Form
     {
-        Button btnEdit, btnUnselect, btnDelete;
         DataTable table = new DataTable();
-
-        public EntryForm()
+        public ExitForm()
         {
             InitializeComponent();
-            MySqlUtils mysql = new MySqlUtils();
-            
-
-            btnEdit = new Button();
-            btnEdit.Text = "Chỉnh sửa";
-            btnEdit.Location = new Point(btnReset.Location.X - 20, btnReset.Location.Y);
-            btnEdit.Size = btnReset.Size;
-            btnEdit.Padding = new Padding(3);
-            btnEdit.Size = new Size(100, btnReset.Size.Height);
-
-            btnUnselect = new Button();
-            btnUnselect.Text = "Bỏ chọn";
-            btnUnselect.Location = btnAdd.Location;
-            btnUnselect.Size = btnAdd.Size;
-            btnUnselect.Click += btnUnselect_Click;
-
-            btnDelete = new Button();
-            btnDelete.Text = "Xóa";
-            btnDelete.Location = new Point(btnReset.Location.X - 110, btnAdd.Location.Y);
-            btnDelete.Size = btnAdd.Size;
-
-            this.Controls.Add(btnEdit);
-            this.Controls.Add(btnUnselect);
-            this.Controls.Add(btnDelete);
-
-            btnEdit.Hide();
-            btnUnselect.Hide();
-            btnDelete.Hide();
-
-            foreach (Button b in this.Controls.OfType<Button>())
-            {
-                b.Cursor = Cursors.Hand;
-            }
         }
 
-
-        private void EntryForm_Load(object sender, EventArgs e)
+        private void ExitForm_Load(object sender, EventArgs e)
         {
             table.Columns.Add("Id", typeof(int));
             table.Columns.Add("Passport", typeof(string));
@@ -62,8 +26,9 @@ namespace EntryExitCivy
 
             table.Rows.Add(1234, "A1234", "Ho Nguyen Cong Sang");
             table.Rows.Add(1235, "A1235", "Ho Cong Hoang");
+            table.Rows.Add(1237, "A1237", "Haha");
 
-            entryData.DataSource = table;
+            exitData.DataSource = table;
 
             try
             {
@@ -126,15 +91,15 @@ namespace EntryExitCivy
         private void btnAdd_Click(object sender, EventArgs e)
         {
             long passport_no = Convert.ToInt64(txtPassport.Text);
-            string name = txtName.Text;
+            string name = Utils.ChuanHoa(txtName.Text);
             string gender = rdbMale.Checked ? "Nam" : "Nữ";
             string birthday = dtpBirthday.Value.ToString("yyyy-MM-dd");
             string nationality = cbNationality.Text;
             string phone = txtPhone.Text;
-            string address = txtAddress.Text;
-            string occupation = txtOccupation.Text;
-            string arrival_day = dtpArrivalDate.Value.ToString("yyyy-MM-dd");
-            string expected_destination = txtExpectedDestination.Text;
+            string address = Utils.ChuanHoa(txtAddress.Text);
+            string occupation = Utils.ChuanHoa(txtOccupation.Text);
+            string departure_day = dtpDepartDate.Value.ToString("yyyy-MM-dd");
+            string destination = Utils.ChuanHoa(txtDestination.Text);
             string visa_expriration = dtpVisaExpire.Value.ToString("yyyy-MM-dd");
             string passport_expriration = dtpPassportExpire.Value.ToString("yyyy-MM-dd");
             string purpose = cbPurpose.Text;
@@ -145,12 +110,12 @@ namespace EntryExitCivy
                 if (exist == passport_no)
                 {
                     
-                    MySqlUtils.AddEntry(passport_no, arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+                    MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
                 }
                 else
                 {
                     MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
-                    MySqlUtils.AddEntry(passport_no, arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+                    MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
                 }
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
             }
@@ -164,11 +129,11 @@ namespace EntryExitCivy
         {
             try
             {
-                for (int i = 0; i < entryData.SelectedRows.Count; i++)
+                for (int i = 0; i < exitData.SelectedRows.Count; i++)
                 {
-                    int selectedIndex = entryData.SelectedRows[i].Index;
-                    int id = int.Parse(entryData[0, selectedIndex].Value.ToString());
-                    MySqlUtils.DeleteEntry(id);
+                    int selectedIndex = exitData.SelectedRows[i].Index;
+                    int id = int.Parse(exitData[0, selectedIndex].Value.ToString());
+                    MySqlUtils.DeleteExit(id);
                 }
                 MessageBox.Show(text: "Xóa thành công!", caption: "Inform");
             }
@@ -178,33 +143,5 @@ namespace EntryExitCivy
             } 
         }
 
-
-        private void btnUnselect_Click(object sender, EventArgs e)
-        {
-            btnDelete.Hide();
-            btnEdit.Hide();
-            btnUnselect.Hide();
-
-            btnAdd.Show();
-            btnReset.Show();
-
-            txtId.Text = "";
-            txtNation.Text = "";
-
-            dgridEntry.ClearSelection();
-        }
-
-
-        private void dgridEntry_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            dgridEntry.ClearSelection();        
-        }
-
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            DateTime d = DateTime.ParseExact("2022-01-24", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-            Console.WriteLine(d.ToString("yyyy-mm-dd"));
-        }
     }
 }

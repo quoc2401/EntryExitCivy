@@ -1,6 +1,6 @@
 ﻿namespace EntryExitCivy
 {
-    partial class EntryForm
+    partial class ExitForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,23 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.cbPurpose = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbCity = new System.Windows.Forms.ComboBox();
             this.cbDistrict = new System.Windows.Forms.ComboBox();
             this.cbNationality = new System.Windows.Forms.ComboBox();
             this.dtpPassportExpire = new System.Windows.Forms.DateTimePicker();
             this.dtpVisaExpire = new System.Windows.Forms.DateTimePicker();
-            this.dtpArrivalDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpDepartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
             this.gbGender = new System.Windows.Forms.Panel();
             this.rdbMale = new System.Windows.Forms.RadioButton();
             this.rdbFemale = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnReset = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgridEntry)).BeginInit();
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -60,17 +57,56 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOccupation = new System.Windows.Forms.TextBox();
-            this.txtExpectedDestination = new System.Windows.Forms.TextBox();
+            this.txtDestination = new System.Windows.Forms.TextBox();
             this.txtPassport = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.entryData = new System.Windows.Forms.DataGridView();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.exitData = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.gbGender.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.entryData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitData)).BeginInit();
             this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtAddress);
+            this.groupBox1.Controls.Add(this.cbPurpose);
+            this.groupBox1.Controls.Add(this.cbCity);
+            this.groupBox1.Controls.Add(this.cbDistrict);
+            this.groupBox1.Controls.Add(this.cbNationality);
+            this.groupBox1.Controls.Add(this.dtpPassportExpire);
+            this.groupBox1.Controls.Add(this.dtpVisaExpire);
+            this.groupBox1.Controls.Add(this.dtpDepartDate);
+            this.groupBox1.Controls.Add(this.dtpBirthday);
+            this.groupBox1.Controls.Add(this.gbGender);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.txtOccupation);
+            this.groupBox1.Controls.Add(this.txtDestination);
+            this.groupBox1.Controls.Add(this.txtPassport);
+            this.groupBox1.Controls.Add(this.txtPhone);
+            this.groupBox1.Controls.Add(this.txtName);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(877, 578);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Thông tin";
             // 
             // txtAddress
             // 
@@ -90,45 +126,6 @@
             this.cbPurpose.Name = "cbPurpose";
             this.cbPurpose.Size = new System.Drawing.Size(224, 28);
             this.cbPurpose.TabIndex = 13;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtAddress);
-            this.groupBox1.Controls.Add(this.cbPurpose);
-            this.groupBox1.Controls.Add(this.cbCity);
-            this.groupBox1.Controls.Add(this.cbDistrict);
-            this.groupBox1.Controls.Add(this.cbNationality);
-            this.groupBox1.Controls.Add(this.dtpPassportExpire);
-            this.groupBox1.Controls.Add(this.dtpVisaExpire);
-            this.groupBox1.Controls.Add(this.dtpArrivalDate);
-            this.groupBox1.Controls.Add(this.dtpBirthday);
-            this.groupBox1.Controls.Add(this.gbGender);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtOccupation);
-            this.groupBox1.Controls.Add(this.txtExpectedDestination);
-            this.groupBox1.Controls.Add(this.txtPassport);
-            this.groupBox1.Controls.Add(this.txtPhone);
-            this.groupBox1.Controls.Add(this.txtName);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(877, 578);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin";
             // 
             // cbCity
             // 
@@ -190,17 +187,15 @@
             this.dtpVisaExpire.Size = new System.Drawing.Size(316, 26);
             this.dtpVisaExpire.TabIndex = 10;
             // 
-            // dtpArrivalDate
+            // dtpDepartDate
             // 
-            this.dtpArrivalDate.Location = new System.Drawing.Point(152, 343);
-            this.dtpArrivalDate.Name = "dtpArrivalDate";
-            this.dtpArrivalDate.Size = new System.Drawing.Size(316, 26);
-            this.dtpArrivalDate.TabIndex = 9;
+            this.dtpDepartDate.Location = new System.Drawing.Point(152, 343);
+            this.dtpDepartDate.Name = "dtpDepartDate";
+            this.dtpDepartDate.Size = new System.Drawing.Size(316, 26);
+            this.dtpDepartDate.TabIndex = 9;
             // 
             // dtpBirthday
             // 
-            this.dtpBirthday.CustomFormat = "dd/MM/yyyy";
-            this.dtpBirthday.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpBirthday.Location = new System.Drawing.Point(152, 106);
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(316, 26);
@@ -252,11 +247,11 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(503, 348);
+            this.label9.Location = new System.Drawing.Point(501, 348);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(138, 20);
+            this.label9.Size = new System.Drawing.Size(118, 20);
             this.label9.TabIndex = 1;
-            this.label9.Text = "Nơi đến dự kiến:";
+            this.label9.Text = "Nơi đến(visa):";
             // 
             // label12
             // 
@@ -294,9 +289,9 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(26, 348);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(89, 20);
+            this.label8.Size = new System.Drawing.Size(73, 20);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Ngày đến:";
+            this.label8.Text = "Ngày đi:";
             // 
             // label7
             // 
@@ -394,13 +389,15 @@
             this.txtOccupation.Name = "txtOccupation";
             this.txtOccupation.Size = new System.Drawing.Size(309, 26);
             this.txtOccupation.TabIndex = 3;
+            this.txtOccupation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOccupation_KeyPress);
             // 
-            // txtExpectedDestination
+            // txtDestination
             // 
-            this.txtExpectedDestination.Location = new System.Drawing.Point(650, 345);
-            this.txtExpectedDestination.Name = "txtExpectedDestination";
-            this.txtExpectedDestination.Size = new System.Drawing.Size(200, 26);
-            this.txtExpectedDestination.TabIndex = 11;
+            this.txtDestination.Location = new System.Drawing.Point(640, 345);
+            this.txtDestination.Name = "txtDestination";
+            this.txtDestination.Size = new System.Drawing.Size(210, 26);
+            this.txtDestination.TabIndex = 11;
+            this.txtDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDestination_KeyPress);
             // 
             // txtPassport
             // 
@@ -408,6 +405,7 @@
             this.txtPassport.Name = "txtPassport";
             this.txtPassport.Size = new System.Drawing.Size(222, 26);
             this.txtPassport.TabIndex = 2;
+            this.txtPassport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassport_KeyPress);
             // 
             // txtPhone
             // 
@@ -415,6 +413,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(210, 26);
             this.txtPhone.TabIndex = 4;
+            this.txtPhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPhone_KeyPress);
             // 
             // txtName
             // 
@@ -422,17 +421,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(376, 26);
             this.txtName.TabIndex = 0;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(745, 596);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(135, 56);
-            this.btnDelete.TabIndex = 24;
-            this.btnDelete.Text = "Xóa";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
             // 
             // btnAdd
             // 
@@ -440,78 +429,64 @@
             this.btnAdd.Location = new System.Drawing.Point(595, 596);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(132, 56);
-            this.btnAdd.TabIndex = 23;
+            this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // entryData
+            // btnDelete
             // 
-            this.entryData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(745, 596);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(135, 56);
+            this.btnDelete.TabIndex = 20;
+            this.btnDelete.Text = "Xóa";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // exitData
+            // 
+            this.exitData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.entryData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.entryData.Location = new System.Drawing.Point(895, 24);
-            this.entryData.Name = "entryData";
-            this.entryData.RowTemplate.Height = 28;
-            this.entryData.Size = new System.Drawing.Size(321, 628);
-            this.entryData.TabIndex = 25;
+            this.exitData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.exitData.Location = new System.Drawing.Point(895, 24);
+            this.exitData.Name = "exitData";
+            this.exitData.RowTemplate.Height = 28;
+            this.exitData.Size = new System.Drawing.Size(321, 628);
+            this.exitData.TabIndex = 21;
             // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(229, 200);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 32);
-            this.btnAdd.TabIndex = 5;
-            this.btnAdd.Text = "Thêm";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Location = new System.Drawing.Point(134, 200);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(75, 32);
-            this.btnReset.TabIndex = 6;
-            this.btnReset.Text = "Nhập lại";
-            this.btnReset.UseVisualStyleBackColor = true;
-            // 
-            // EntryForm
+            // ExitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1228, 664);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.exitData);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.entryData);
-            this.Name = "EntryForm";
-            this.Text = "Quản lý nhập cảnh";
-            this.Load += new System.EventHandler(this.EntryForm_Load);
+            this.Controls.Add(this.groupBox1);
+            this.Name = "ExitForm";
+            this.Text = "Quản lý xuất cảnh";
+            this.Load += new System.EventHandler(this.ExitForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbGender.ResumeLayout(false);
             this.gbGender.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.entryData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exitData)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtAddress;
-        private System.Windows.Forms.ComboBox cbPurpose;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cbCity;
-        private System.Windows.Forms.ComboBox cbDistrict;
+        private System.Windows.Forms.ComboBox cbPurpose;
         private System.Windows.Forms.ComboBox cbNationality;
         private System.Windows.Forms.DateTimePicker dtpPassportExpire;
         private System.Windows.Forms.DateTimePicker dtpVisaExpire;
-        private System.Windows.Forms.DateTimePicker dtpArrivalDate;
+        private System.Windows.Forms.DateTimePicker dtpDepartDate;
         private System.Windows.Forms.DateTimePicker dtpBirthday;
-        private System.Windows.Forms.Panel gbGender;
-        private System.Windows.Forms.RadioButton rdbMale;
-        private System.Windows.Forms.RadioButton rdbFemale;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
@@ -519,22 +494,28 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtOccupation;
-        private System.Windows.Forms.TextBox txtExpectedDestination;
-        private System.Windows.Forms.TextBox txtPassport;
+        private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.DataGridView entryData;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.Panel gbGender;
+        private System.Windows.Forms.RadioButton rdbMale;
+        private System.Windows.Forms.RadioButton rdbFemale;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtPassport;
+        private System.Windows.Forms.DataGridView exitData;
+        private System.Windows.Forms.ComboBox cbCity;
+        private System.Windows.Forms.ComboBox cbDistrict;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
 
     }
 }
