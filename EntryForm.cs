@@ -12,7 +12,7 @@ namespace EntryExitCivy
 {
     public partial class EntryForm : Form
     {
-        Button btnEdit, btnUnselect, btnDelete;
+        //Button btnEdit, btnUnselect, btnDelete;
         DataTable table = new DataTable();
 
         public EntryForm()
@@ -21,31 +21,31 @@ namespace EntryExitCivy
             MySqlUtils mysql = new MySqlUtils();
             
 
-            btnEdit = new Button();
-            btnEdit.Text = "Chỉnh sửa";
-            btnEdit.Location = new Point(btnReset.Location.X - 20, btnReset.Location.Y);
-            btnEdit.Size = btnReset.Size;
-            btnEdit.Padding = new Padding(3);
-            btnEdit.Size = new Size(100, btnReset.Size.Height);
+            //btnEdit = new Button();
+            //btnEdit.Text = "Chỉnh sửa";
+            //btnEdit.Location = new Point(btnReset.Location.X - 20, btnReset.Location.Y);
+            //btnEdit.Size = btnReset.Size;
+            //btnEdit.Padding = new Padding(3);
+            //btnEdit.Size = new Size(100, btnReset.Size.Height);
 
-            btnUnselect = new Button();
-            btnUnselect.Text = "Bỏ chọn";
-            btnUnselect.Location = btnAdd.Location;
-            btnUnselect.Size = btnAdd.Size;
-            btnUnselect.Click += btnUnselect_Click;
+            //btnUnselect = new Button();
+            //btnUnselect.Text = "Bỏ chọn";
+            //btnUnselect.Location = btnAdd.Location;
+            //btnUnselect.Size = btnAdd.Size;
+            //btnUnselect.Click += btnUnselect_Click;
 
-            btnDelete = new Button();
-            btnDelete.Text = "Xóa";
-            btnDelete.Location = new Point(btnReset.Location.X - 110, btnAdd.Location.Y);
-            btnDelete.Size = btnAdd.Size;
+            //btnDelete = new Button();
+            //btnDelete.Text = "Xóa";
+            //btnDelete.Location = new Point(btnReset.Location.X - 110, btnAdd.Location.Y);
+            //btnDelete.Size = btnAdd.Size;
 
-            this.Controls.Add(btnEdit);
-            this.Controls.Add(btnUnselect);
-            this.Controls.Add(btnDelete);
+            //this.Controls.Add(btnEdit);
+            //this.Controls.Add(btnUnselect);
+            //this.Controls.Add(btnDelete);
 
-            btnEdit.Hide();
-            btnUnselect.Hide();
-            btnDelete.Hide();
+            //btnEdit.Hide();
+            //btnUnselect.Hide();
+            //btnDelete.Hide();
 
             foreach (Button b in this.Controls.OfType<Button>())
             {
@@ -181,30 +181,30 @@ namespace EntryExitCivy
 
         private void btnUnselect_Click(object sender, EventArgs e)
         {
-            btnDelete.Hide();
-            btnEdit.Hide();
-            btnUnselect.Hide();
+            //btnDelete.Hide();
+            //btnEdit.Hide();
+            //btnUnselect.Hide();
 
-            btnAdd.Show();
-            btnReset.Show();
+            //btnAdd.Show();
+            //btnReset.Show();
 
-            txtId.Text = "";
-            txtNation.Text = "";
+            //txtId.Text = "";
+            //txtNation.Text = "";
 
-            dgridEntry.ClearSelection();
+            //dgridEntry.ClearSelection();
         }
 
 
         private void dgridEntry_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            dgridEntry.ClearSelection();        
+            //dgridEntry.ClearSelection();        
         }
 
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            DateTime d = DateTime.ParseExact("2022-01-24", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-            Console.WriteLine(d.ToString("yyyy-mm-dd"));
-        }
+        //private void btnAdd_Click(object sender, EventArgs e)
+        //{
+        //    DateTime d = DateTime.ParseExact("2022-01-24", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        //    Console.WriteLine(d.ToString("yyyy-mm-dd"));
+        //}
     }
 }
