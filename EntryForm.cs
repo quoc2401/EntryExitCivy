@@ -101,14 +101,11 @@ namespace EntryExitCivy
             dgridEntry.ClearSelection();        
         }
 
-        private void EntryForm_Resize(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-        
+            DateTime d = DateTime.ParseExact("2022-01-24", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+            Console.WriteLine(d.ToString("yyyy-mm-dd"));
         }
     }
 }

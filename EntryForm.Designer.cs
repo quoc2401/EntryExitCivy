@@ -119,7 +119,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntryForm";
             this.Load += new System.EventHandler(this.EntryForm_Load);
-            this.Resize += new System.EventHandler(this.EntryForm_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgridEntry)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
