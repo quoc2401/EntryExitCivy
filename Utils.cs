@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace EntryExitCivy
 {
@@ -20,6 +23,13 @@ namespace EntryExitCivy
                 s1 += s + " ";
             }
             return s1;
+        }
+
+        public static void AddComboBoxItems(ComboBox index, DataSet data)
+        {
+            index.DataSource = data.Tables[0];
+            index.ValueMember = "id";
+            index.DisplayMember = "name";
         }
     }
 }

@@ -121,9 +121,7 @@
             this.cbPurpose.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPurpose.FormattingEnabled = true;
             this.cbPurpose.Items.AddRange(new object[] {
-            "Du học",
-            "Đi làm",
-            "Du lịch"});
+            "STUDY"});
             this.cbPurpose.Location = new System.Drawing.Point(152, 510);
             this.cbPurpose.Name = "cbPurpose";
             this.cbPurpose.Size = new System.Drawing.Size(224, 28);
@@ -169,11 +167,7 @@
             this.cbNationality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNationality.FormattingEnabled = true;
             this.cbNationality.Items.AddRange(new object[] {
-            "Việt Nam",
-            "Mỹ",
-            "Hàn Quốc",
-            "Trung Quốc",
-            "Anh"});
+            "VN"});
             this.cbNationality.Location = new System.Drawing.Point(614, 277);
             this.cbNationality.Name = "cbNationality";
             this.cbNationality.Size = new System.Drawing.Size(236, 28);

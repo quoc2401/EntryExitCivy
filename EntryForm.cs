@@ -24,10 +24,22 @@ namespace EntryExitCivy
             table.Columns.Add("Passport", typeof(string));
             table.Columns.Add("Name", typeof(string));
 
-            table.Rows.Add(1, "A1234", "Ho Nguyen Cong Sang");
-            table.Rows.Add(4, "A1235", "Ho Cong Hoang");
+            table.Rows.Add(1234, "A1234", "Ho Nguyen Cong Sang");
+            table.Rows.Add(1235, "A1235", "Ho Cong Hoang");
 
             entryData.DataSource = table;
+
+            try
+            {
+                DataSet data = MySqlUtils.GetNationsItems();
+                Utils.AddComboBoxItems(cbNationality, data);
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(text: ex.Message, caption: "Error");
+            }
+
+            cbPurpose.DataSource = Enum.GetValues(typeof(purpose));
         }
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
@@ -77,30 +89,39 @@ namespace EntryExitCivy
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string passport_no = txtPassport.Text;
+            long passport_no = Convert.ToInt64(txtPassport.Text);
             string name = txtName.Text;
             string gender = rdbMale.Checked ? "Nam" : "Nữ";
-            string birthday = dtpBirthday.Value.ToString("dd-MM-yyyy");
+            string birthday = dtpBirthday.Value.ToString("yyyy-MM-dd");
             string nationality = cbNationality.Text;
             string phone = txtPhone.Text;
-            string address = txtAddress.Text + ", " + cbDistrict.Text + ", " + cbCity.Text;
+            string address = txtAddress.Text;
             string occupation = txtOccupation.Text;
-            string arrival_day = dtpArrivalDate.Value.ToString("dd-MM-yyyy");
+            string arrival_day = dtpArrivalDate.Value.ToString("yyyy-MM-dd");
             string expected_destination = txtExpectedDestination.Text;
-            string visa_expriration = dtpVisaExpire.Value.ToString("dd-MM-yyyy");
-            string passport_expriration = dtpPassportExpire.Value.ToString("dd-MM-yyyy");
+            string visa_expriration = dtpVisaExpire.Value.ToString("yyyy-MM-dd");
+            string passport_expriration = dtpPassportExpire.Value.ToString("yyyy-MM-dd");
             string purpose = cbPurpose.Text;
 
+            long exist = MySqlUtils.CivyExist(passport_no);
             try
             {
-                MySqlUtils.AddEntry(passport_no, name, gender, birthday, nationality, phone, address, occupation,
-                    arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+                if (exist == passport_no)
+                {
+                    
+                    MySqlUtils.AddEntry(passport_no, arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+                }
+                else
+                {
+                    MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
+                    MySqlUtils.AddEntry(passport_no, arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+                }
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(text: ex.Message, caption: "Error");
-            }
+            } 
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
