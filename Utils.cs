@@ -14,7 +14,7 @@ namespace EntryExitCivy
     {
         public static string ChuanHoa(string test)
         {
-            string[] kq = test.Split(new char[] { ' ', '\n', '\t', ',', '.' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] kq = test.Split(new char[] { ' ', '\n', '\t', '.' }, StringSplitOptions.RemoveEmptyEntries);
             string s1 = "";
             for (int i = 0; i < kq.Length; i++)
             {

@@ -40,7 +40,7 @@ namespace EntryExitCivy
                 MessageBox.Show(text: ex.Message, caption: "Error");
             }
 
-            cbPurpose.DataSource = Enum.GetValues(typeof(purpose));
+            cbPurpose.DataSource = Enum.GetValues(typeof(Purpose));
         }
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
@@ -94,7 +94,7 @@ namespace EntryExitCivy
             string name = Utils.ChuanHoa(txtName.Text);
             string gender = rdbMale.Checked ? "Nam" : "Nữ";
             string birthday = dtpBirthday.Value.ToString("yyyy-MM-dd");
-            string nationality = cbNationality.Text;
+            string nationality = cbNationality.ValueMember;
             string phone = txtPhone.Text;
             string address = Utils.ChuanHoa(txtAddress.Text);
             string occupation = Utils.ChuanHoa(txtOccupation.Text);
@@ -114,7 +114,7 @@ namespace EntryExitCivy
                 }
                 else
                 {
-                    MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
+                    MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, nationality, phone, address, occupation);
                     MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
                 }
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");

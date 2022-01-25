@@ -68,9 +68,9 @@ namespace EntryExitCivy
             }
         }
 
-        public static long CivyExist(long passport_no)
+        public static string CivyExist(string passport_no)
         {
-            long id = 0;
+            string id = "";
             string query = "Select id from civy where id = '" + passport_no + "';";
             if (OpenConn())
             {
@@ -83,12 +83,12 @@ namespace EntryExitCivy
                     {
                         while (reader.Read())
                         {
-                            id = Convert.ToInt64(reader.GetValue(0));
+                            id = reader.GetValue(0).ToString();
                         }
                     }
                     else
                     {
-                        id = 0;
+                        id = "";
                     }
                 }
             }
@@ -97,11 +97,11 @@ namespace EntryExitCivy
             return id;
         }
 
-        public static void AddNewCivy(long passport_no, string name, string gender, string birthday,
-                                      string nationality, string phone, string address, string occupation)
+        public static void AddNewCivy(Civy c)
         {
             string query = "Insert into eedata.civy(id, fullname, gender, birthday, nationality, phone, home_address, occupation)" +
-                           "values('" + passport_no + "','" + name + "','" + gender + "','" + birthday + "','" + nationality + "','" + phone + "','" + address + "','" + occupation + "')";
+                "values('" + c.Id + "','" + c.Name + "','" + (c.Gender ? 1 : 0).ToString() + "','" + c.Birthday.ToString("yyyy-MM-dd") + 
+                           "','" + c.Nationality + "','" + c.Phone + "','" + c.Address + "','" + c.Occupation + "')";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -110,10 +110,11 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void AddExit (long passport_no, string departure_day, string destination, string visa_expiration, string passport_expiration, string purpose)
+        public static void AddExit (Exit e)
         {
             string query = "Insert into eedata.exit(civy_id, depart_date, destination, visa_expiration, passport_expiration, purpose)" +
-                          "values('" + passport_no + "','" + departure_day + "','" + destination + "','" + visa_expiration + "','" + passport_expiration + "','" + purpose + "')";
+                          "values('" + e.Civy_id + "','" + e.Depart_date.ToString("yyyy-MM-dd") + "','" + e.Destination + "','" + e.Visa_expiration.ToString("yyyy-MM-dd") + 
+                          "','" + e.Passport_expiration.ToString("yyyy-MM-dd") + "','" + e.Purpose + "')";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -122,10 +123,11 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void AddEntry(long passport_no, string arrival_day, string expected_destination, string visa_expiration, string passport_expiration, string purpose)
+        public static void AddEntry(Entry e)
         {
             string query = "Insert into eedata.entry(civy_id, arrival_date, expected_destination, visa_expiration, passport_expiration, purpose)" +
-                          "values('" + passport_no + "','" + arrival_day + "','" + expected_destination + "','" + visa_expiration + "','" + passport_expiration + "','" + purpose + "')";
+                          "values('" + e.Civy_id + "','" + e.Arrival_date.ToString("yyyy-MM-dd") + "','" + e.Expected_destination + "','" + e.Visa_expiration.ToString("yyyy-MM-dd") +
+                          "','" + e.Passport_expiration.ToString("yyyy-MM-dd") + "','" + e.Purpose + "')";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -134,7 +136,7 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void DeleteExit(int id)
+        public static void DeleteExit(string id)
         {
             string query = "Delete from eedata.exit where civy_id = '" + id + "';";
             if (OpenConn())
@@ -145,7 +147,7 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void DeleteEntry(int id)
+        public static void DeleteEntry(string id)
         {
             string query = "Delete from eedata.entry where civy_id = '" + id + "';";
             if (OpenConn())
