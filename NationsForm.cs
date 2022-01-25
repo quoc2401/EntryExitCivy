@@ -69,6 +69,10 @@ namespace EntryExitCivy
             dgridNation.ClearSelection();
         }
 
+        private void label2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.label2.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
+        }
 
     }
 }

@@ -67,15 +67,18 @@ namespace EntryExitCivy
 
             try
             {
-                DataSet data = MySqlUtils.GetNationsItems();
-                Utils.AddComboBoxItems(cbNationality, data);
+                DataTable data = MySqlUtils.GetNationsItems();
+                //Utils.AddComboBoxItems(cbNationality, data);
+                cbNationality.ValueMember = "id";
+                cbNationality.DisplayMember = "name";
+                cbNationality.DataSource = data;
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(text: ex.Message, caption: "Error");
             }
 
-            cbPurpose.DataSource = Enum.GetValues(typeof(purpose));
+            cbPurpose.DataSource = Enum.GetValues(typeof(Purpose));
         }
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
@@ -125,38 +128,47 @@ namespace EntryExitCivy
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            long passport_no = Convert.ToInt64(txtPassport.Text);
-            string name = txtName.Text;
-            string gender = rdbMale.Checked ? "Nam" : "Nữ";
-            string birthday = dtpBirthday.Value.ToString("yyyy-MM-dd");
-            string nationality = cbNationality.Text;
-            string phone = txtPhone.Text;
-            string address = txtAddress.Text;
-            string occupation = txtOccupation.Text;
-            string arrival_day = dtpArrivalDate.Value.ToString("yyyy-MM-dd");
-            string expected_destination = txtExpectedDestination.Text;
-            string visa_expriration = dtpVisaExpire.Value.ToString("yyyy-MM-dd");
-            string passport_expriration = dtpPassportExpire.Value.ToString("yyyy-MM-dd");
-            string purpose = cbPurpose.Text;
-
-            long exist = MySqlUtils.CivyExist(passport_no);
             try
             {
+                string passport_no = txtPassport.Text;
+                string name = txtName.Text;
+                bool gender = rdbMale.Checked ? true : false;
+                DateTime birthday = dtpBirthday.Value;
+                string nationality = cbNationality.SelectedValue.ToString();
+                string phone = txtPhone.Text;
+                string address = txtAddress.Text;
+                string occupation = txtOccupation.Text;
+                DateTime arrival_day = dtpArrivalDate.Value;
+                string expected_destination = txtExpectedDestination.Text;
+                DateTime visa_expriration = dtpVisaExpire.Value;
+                DateTime passport_expriration = dtpPassportExpire.Value;
+                Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose),cbPurpose.Text, true);
+
+                Civy c = new Civy(id: passport_no, fullname: name, gender: gender, birthday: birthday
+                                 , nationality: nationality, phone: phone, home_address: address, occupation: occupation);
+
+                Entry en = new Entry(civy_id: passport_no, arrival_date: arrival_day, visa_expiration: visa_expriration
+                                    , passport_expiration: passport_expriration, purpose: purpose
+                                    , expected_destination:expected_destination);
+
+                string exist = MySqlUtils.CivyExist(passport_no);
+          
                 if (exist == passport_no)
                 {
-                    
-                    MySqlUtils.AddEntry(passport_no, arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+
+                    MySqlUtils.AddEntry(en);
                 }
                 else
                 {
-                    MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
-                    MySqlUtils.AddEntry(passport_no, arrival_day, expected_destination, visa_expriration, passport_expriration, purpose);
+                    MySqlUtils.AddNewCivy(c);
+                    MySqlUtils.AddEntry(en);
                 }
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(text: ex.Message, caption: "Error");
+                MySqlUtils.CloseConn();
             } 
         }
 
@@ -198,6 +210,11 @@ namespace EntryExitCivy
         private void dgridEntry_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             //dgridEntry.ClearSelection();        
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
         }
 
 

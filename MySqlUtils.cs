@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "15082001";
+            password = "quoc2401";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database
@@ -38,7 +38,7 @@ namespace EntryExitCivy
             conn = new MySqlConnection(connString);
         }
 
-        private static bool OpenConn()
+        public static bool OpenConn()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace EntryExitCivy
         }
 
 
-        private static bool CloseConn()
+        public static bool CloseConn()
         {
             try
             {
@@ -68,9 +68,9 @@ namespace EntryExitCivy
             }
         }
 
-        public static long CivyExist(long passport_no)
+        public static string CivyExist(string passport_no)
         {
-            long id = 0;
+            string id = "";
             string query = "Select id from civy where id = '" + passport_no + "';";
             if (OpenConn())
             {
@@ -83,12 +83,12 @@ namespace EntryExitCivy
                     {
                         while (reader.Read())
                         {
-                            id = Convert.ToInt64(reader.GetValue(0));
+                            id = reader.GetValue(0).ToString();
                         }
                     }
                     else
                     {
-                        id = 0;
+                        id = "";
                     }
                 }
             }
@@ -97,11 +97,12 @@ namespace EntryExitCivy
             return id;
         }
 
-        public static void AddNewCivy(long passport_no, string name, string gender, string birthday,
-                                      string nationality, string phone, string address, string occupation)
+        public static void AddNewCivy(Civy c)
         {
-            string query = "Insert into eedata.civy(id, fullname, gender, birthday, nationality, phone, home_address, occupation)" +
-                           "values('" + passport_no + "','" + name + "','" + gender + "','" + birthday + "','" + nationality + "','" + phone + "','" + address + "','" + occupation + "')";
+            string query = "Insert into eedata.civy(id, fullname, gender, birthday, nationality, phone, home_address" +
+                ", occupation) values('" + c.Id.ToString() + "','" + c.Fullname + "','" + (c.Gender ? 1 : 0).ToString() +
+                           "','" + c.Birthday.ToString("yyyy-MM-dd") + "','" + c.Nationality + "','" + c.Phone +
+                           "','" + c.Home_address + "','" + c.Occupation + "')";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -122,10 +123,13 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void AddEntry(long passport_no, string arrival_day, string expected_destination, string visa_expiration, string passport_expiration, string purpose)
+        public static void AddEntry(Entry en)
         {
-            string query = "Insert into eedata.entry(civy_id, arrival_date, expected_destination, visa_expiration, passport_expiration, purpose)" +
-                          "values('" + passport_no + "','" + arrival_day + "','" + expected_destination + "','" + visa_expiration + "','" + passport_expiration + "','" + purpose + "')";
+            string query = "Insert into eedata.entry(civy_id, arrival_date, expected_destination, visa_expiration," +
+                           " passport_expiration, purpose) values('" + en.Civy_id.ToString() + "','" +
+                           en.Arrival_date.ToString("yyyy-MM-dd")+ "','" + en.Expected_destination + "','" +
+                           en.Visa_expiration.ToString("yyyy-MM-dd") + "','" +
+                           en.Passport_expiration.ToString("yyyy-MM-dd") + "','" + en.Purpose.ToString() + "')";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -182,10 +186,10 @@ namespace EntryExitCivy
             mda.Update(changes);
         }
 
-        public static DataSet GetNationsItems()
+        public static DataTable GetNationsItems()
         {
             string query = "Select * from eedata.nation";
-            var nations = new DataSet();
+            var nations = new DataTable();
 
             if (OpenConn())
             {

@@ -63,9 +63,14 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.entryData = new System.Windows.Forms.DataGridView();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnReset = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbGender.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.entryData)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtAddress
@@ -121,6 +126,7 @@
             this.groupBox1.Controls.Add(this.txtPassport);
             this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.txtName);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBox1.Location = new System.Drawing.Point(11, 10);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
@@ -128,7 +134,7 @@
             this.groupBox1.Size = new System.Drawing.Size(779, 462);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin";
+            this.groupBox1.Text = "Thông tin nhập cảnh";
             // 
             // cbCity
             // 
@@ -440,33 +446,82 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(529, 477);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Location = new System.Drawing.Point(664, 477);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(117, 45);
+            this.btnAdd.Size = new System.Drawing.Size(117, 55);
             this.btnAdd.TabIndex = 23;
             this.btnAdd.Text = "Thêm";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // entryData
             // 
             this.entryData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.entryData.BackgroundColor = System.Drawing.Color.DarkCyan;
             this.entryData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.entryData.Location = new System.Drawing.Point(796, 19);
+            this.entryData.Location = new System.Drawing.Point(796, 63);
             this.entryData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.entryData.Name = "entryData";
             this.entryData.RowTemplate.Height = 28;
-            this.entryData.Size = new System.Drawing.Size(496, 502);
+            this.entryData.Size = new System.Drawing.Size(496, 471);
             this.entryData.TabIndex = 25;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtSearch.Location = new System.Drawing.Point(11, 6);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(342, 27);
+            this.txtSearch.TabIndex = 27;
+            this.txtSearch.Text = "Mã hộ chiếu...";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnSearch.Location = new System.Drawing.Point(376, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(95, 28);
+            this.btnSearch.TabIndex = 28;
+            this.btnSearch.Text = "Tìm";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.Location = new System.Drawing.Point(797, 18);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(494, 40);
+            this.panel1.TabIndex = 29;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.Location = new System.Drawing.Point(22, 477);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(117, 57);
+            this.btnReset.TabIndex = 30;
+            this.btnReset.Text = "Nhập lại";
+            this.btnReset.UseVisualStyleBackColor = false;
             // 
             // EntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1303, 531);
+            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.ClientSize = new System.Drawing.Size(1303, 544);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.entryData);
@@ -479,6 +534,8 @@
             this.gbGender.ResumeLayout(false);
             this.gbGender.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.entryData)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -518,9 +575,12 @@
         private System.Windows.Forms.TextBox txtPassport;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView entryData;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnReset;
 
     }
 }
