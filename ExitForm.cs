@@ -16,6 +16,7 @@ namespace EntryExitCivy
         public ExitForm()
         {
             InitializeComponent();
+            MySqlUtils my = new MySqlUtils();
         }
 
         private void ExitForm_Load(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace EntryExitCivy
 
             try
             {
-                DataSet data = MySqlUtils.GetNationsItems();
+                DataTable data = MySqlUtils.GetNationsItems();
                 Utils.AddComboBoxItems(cbNationality, data);
             }
             catch (MySqlException ex)
@@ -40,7 +41,7 @@ namespace EntryExitCivy
                 MessageBox.Show(text: ex.Message, caption: "Error");
             }
 
-            cbPurpose.DataSource = Enum.GetValues(typeof(purpose));
+            cbPurpose.DataSource = Enum.GetValues(typeof(Purpose));
         }
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
@@ -90,7 +91,7 @@ namespace EntryExitCivy
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            long passport_no = Convert.ToInt64(txtPassport.Text);
+            string passport_no = txtPassport.Text;
             string name = Utils.ChuanHoa(txtName.Text);
             string gender = rdbMale.Checked ? "Nam" : "Nữ";
             string birthday = dtpBirthday.Value.ToString("yyyy-MM-dd");
@@ -104,18 +105,18 @@ namespace EntryExitCivy
             string passport_expriration = dtpPassportExpire.Value.ToString("yyyy-MM-dd");
             string purpose = cbPurpose.Text;
 
-            long exist = MySqlUtils.CivyExist(passport_no);
+            string exist = MySqlUtils.CivyExist(passport_no);
             try
             {
                 if (exist == passport_no)
                 {
                     
-                    MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
+                    //MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
                 }
                 else
                 {
-                    MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
-                    MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
+                    //MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
+                    //MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
                 }
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
             }
@@ -141,6 +142,11 @@ namespace EntryExitCivy
             {
                 MessageBox.Show(text: ex.Message, caption: "Error");
             } 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
         }
 
     }

@@ -25,11 +25,11 @@ namespace EntryExitCivy
             return s1;
         }
 
-        public static void AddComboBoxItems(ComboBox index, DataSet data)
-        {
-            index.DataSource = data.Tables[0];
+        public static void AddComboBoxItems(ComboBox index, DataTable data)
+        {          
             index.ValueMember = "id";
             index.DisplayMember = "name";
+            index.DataSource = data;
         }
     }
 }
