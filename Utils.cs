@@ -31,5 +31,96 @@ namespace EntryExitCivy
             index.DisplayMember = "name";
             index.DataSource = data;
         }
+
+        public static void Clear(GroupBox g)
+        {
+            foreach(var t in g.Controls.OfType<TextBox>())
+                t.Clear();
+            foreach (var c in g.Controls.OfType<ComboBox>())
+                c.SelectedIndex = 0;
+        }
+
+        public static void FormatButtons(Form f)
+        {
+            foreach (var b in f.Controls.OfType<Button>())
+            {
+                b.BackColor = Color.DarkCyan;
+                b.Size = new Size(117, 55);
+                b.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+                b.Cursor = Cursors.Hand;
+            }
+        }
+
+        public static void menuClick(Form f, ToolStripMenuItem mi)
+        {
+            var nextForm = new Form();
+            switch (mi.Name.ToString())
+            { 
+                case "miNation":
+                    nextForm = new NationsForm();
+                    break;
+
+                case "miExit":
+                    nextForm = new ExitForm();
+                    break;
+
+                case "miEntry":
+                    nextForm = new EntryForm();
+                    break;
+
+                default:
+                    break;
+            }
+            
+            nextForm.WindowState = f.WindowState;
+            f.Hide();
+            nextForm.ShowDialog();
+            f.Close();  
+        }
+
+        public static void NumberOnly(KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar) || char.IsNumber(e.KeyChar))
+            {
+                return;
+            }
+            e.Handled = true;
+        }
+
+        public static void LetterAndNumber(KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsNumber(e.KeyChar))
+            {
+                return;
+            }
+            e.Handled = true;
+        }
+
+        public static void LetterOnly(KeyPressEventArgs e)
+        {
+            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar))
+            {
+                return;
+            }
+            e.Handled = true;
+        }
+
+        public static void RemovePlaceholder(TextBox t)
+        {
+            if (t.Text == " Số hộ chiếu...")
+            {
+                t.ForeColor = Color.Black;
+                t.Clear(); 
+            }        
+        }
+
+        public static void AddPlaceholder(TextBox t)
+        {
+            if (t.Text == "")
+            {
+                t.ForeColor = Color.DarkGray;
+                t.Text = " Số hộ chiếu...";
+            }
+        }
     }
 }

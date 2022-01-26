@@ -12,11 +12,41 @@ namespace EntryExitCivy
 {
     public partial class ExitForm : Form
     {
+        Button btnEdit, btnUnselect, btnDelete;
         DataTable table = new DataTable();
         public ExitForm()
         {
             InitializeComponent();
             MySqlUtils my = new MySqlUtils();
+
+            btnEdit = new Button();
+            btnEdit.Text = "Chỉnh sửa";
+            btnEdit.Location = new Point(btnAdd.Location.X - 150, btnReset.Location.Y);
+            btnEdit.Size = btnReset.Size;
+            btnEdit.Padding = new Padding(3);
+            btnEdit.Size = new Size(100, btnReset.Size.Height);
+
+            btnUnselect = new Button();
+            btnUnselect.Text = "Bỏ chọn";
+            btnUnselect.Location = btnAdd.Location;
+            btnUnselect.Size = btnAdd.Size;
+            btnUnselect.Click += btnUnselect_Click;
+
+            btnDelete = new Button();
+            btnDelete.Text = "Xóa";
+            btnDelete.Location = new Point(btnEdit.Location.X - 150, btnAdd.Location.Y);
+            btnDelete.Size = btnAdd.Size;
+            btnDelete.Click += btnDelete_Click;
+
+            this.Controls.Add(btnEdit);
+            this.Controls.Add(btnUnselect);
+            this.Controls.Add(btnDelete);
+
+            Utils.FormatButtons(this);
+
+            btnEdit.Hide();
+            btnUnselect.Hide();
+            btnDelete.Hide();
         }
 
         private void ExitForm_Load(object sender, EventArgs e)
@@ -44,50 +74,32 @@ namespace EntryExitCivy
             cbPurpose.DataSource = Enum.GetValues(typeof(Purpose));
         }
 
+
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar))
-            {
-                return;
-            }
-            e.Handled = true;
+            Utils.LetterOnly(e);
         }
 
         private void txtPassport_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsNumber(e.KeyChar))
-            {
-                return;
-            }
-            e.Handled = true;
+            Utils.LetterAndNumber(e);
         }
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsControl(e.KeyChar) || char.IsNumber(e.KeyChar))
-            {
-                return;
-            }
-            e.Handled = true;
+            Utils.NumberOnly(e);
         }
 
         private void txtOccupation_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar))
-            {
-                return;
-            }
-            e.Handled = true;
+            Utils.LetterOnly(e);
         }
 
         private void txtDestination_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar))
-            {
-                return;
-            }
-            e.Handled = true;
+            Utils.LetterOnly(e);
         }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -144,9 +156,80 @@ namespace EntryExitCivy
             } 
         }
 
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Utils.Clear(groupBox1);
+        }
+
+        private void btnUnselect_Click(object sender, EventArgs e)
+        {
+            btnDelete.Hide();
+            btnEdit.Hide();
+            btnUnselect.Hide();
+
+            btnAdd.Show();
+            btnReset.Show();
+
+            foreach (var t in this.Controls.OfType<TextBox>())
+                t.Text = "";
+            foreach (var c in this.Controls.OfType<ComboBox>())
+                c.SelectedIndex = 0;
+
+            exitData.ClearSelection();
+        }
+
+
+        private void exitData_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnAdd.Hide();
+            btnReset.Hide();
+            btnEdit.Show();
+            btnDelete.Show();
+            btnUnselect.Show();
+        }
+
+
+        private void miEntry_Click(object sender, EventArgs e)
+        {
+            Utils.menuClick(this, miEntry);
+        }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            Utils.menuClick(this, miExit);
+        }
+
+        private void miNation_Click(object sender, EventArgs e)
+        {
+            Utils.menuClick(this, miNation);
+        }
+
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
+        }
+
+
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Utils.LetterAndNumber(e);
+        }
+
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            Utils.RemovePlaceholder((TextBox)sender);
+        }
+
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            Utils.AddPlaceholder((TextBox)sender);
+        }
+
+
+        private void exitData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            exitData.ClearSelection();
         }
 
     }
