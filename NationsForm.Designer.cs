@@ -55,12 +55,14 @@
             this.miEntry.Name = "miEntry";
             this.miEntry.Size = new System.Drawing.Size(92, 24);
             this.miEntry.Text = "Nhập cảnh";
+            this.miEntry.Click += new System.EventHandler(this.miEntry_Click);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
             this.miExit.Size = new System.Drawing.Size(86, 24);
             this.miExit.Text = "Xuất cảnh";
+            this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
             // miNation
             // 
