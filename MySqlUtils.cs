@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "15082001";
+            password = "quoc2401";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database

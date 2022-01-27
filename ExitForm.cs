@@ -238,6 +238,6 @@ namespace EntryExitCivy
         {
             exitData.ClearSelection();
         }
-
+    
     }
 }
