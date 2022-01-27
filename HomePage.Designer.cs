@@ -1,5 +1,4 @@
-﻿
-namespace EntryExitCivy.EntryExitCivy
+﻿namespace EntryExitCivy
 {
     partial class HomePage
     {
@@ -30,9 +29,9 @@ namespace EntryExitCivy.EntryExitCivy
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnNation = new System.Windows.Forms.Button();
+            this.btnEntry = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,46 +52,49 @@ namespace EntryExitCivy.EntryExitCivy
             this.label1.Location = new System.Drawing.Point(4, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(752, 103);
+            this.label1.Size = new System.Drawing.Size(824, 113);
             this.label1.TabIndex = 6;
             this.label1.Text = "Phần mềm quản lý thông tin người dân xuất nhập cảnh";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button2
+            // btnNation
             // 
-            this.button2.BackColor = System.Drawing.Color.DarkCyan;
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(15, 295);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(231, 45);
-            this.button2.TabIndex = 8;
-            this.button2.TabStop = false;
-            this.button2.Text = "Danh sách các quốc gia";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnNation.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnNation.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnNation.Location = new System.Drawing.Point(15, 295);
+            this.btnNation.Name = "btnNation";
+            this.btnNation.Size = new System.Drawing.Size(231, 45);
+            this.btnNation.TabIndex = 8;
+            this.btnNation.TabStop = false;
+            this.btnNation.Text = "Danh sách các quốc gia";
+            this.btnNation.UseVisualStyleBackColor = false;
+            this.btnNation.Click += new System.EventHandler(this.btnNation_Click);
             // 
-            // button4
+            // btnEntry
             // 
-            this.button4.BackColor = System.Drawing.Color.DarkCyan;
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(15, 183);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(231, 44);
-            this.button4.TabIndex = 10;
-            this.button4.TabStop = false;
-            this.button4.Text = "Nhập cảnh";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnEntry.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnEntry.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnEntry.Location = new System.Drawing.Point(15, 183);
+            this.btnEntry.Name = "btnEntry";
+            this.btnEntry.Size = new System.Drawing.Size(231, 44);
+            this.btnEntry.TabIndex = 10;
+            this.btnEntry.TabStop = false;
+            this.btnEntry.Text = "Nhập cảnh";
+            this.btnEntry.UseVisualStyleBackColor = false;
+            this.btnEntry.Click += new System.EventHandler(this.btnEntry_Click);
             // 
-            // button5
+            // btnExit
             // 
-            this.button5.BackColor = System.Drawing.Color.DarkCyan;
-            this.button5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button5.Location = new System.Drawing.Point(15, 75);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(231, 47);
-            this.button5.TabIndex = 11;
-            this.button5.TabStop = false;
-            this.button5.Text = "Xuất cảnh";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btnExit.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnExit.Location = new System.Drawing.Point(15, 75);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(231, 47);
+            this.btnExit.TabIndex = 11;
+            this.btnExit.TabStop = false;
+            this.btnExit.Text = "Xuất cảnh";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label2
             // 
@@ -102,7 +104,7 @@ namespace EntryExitCivy.EntryExitCivy
             this.label2.Location = new System.Drawing.Point(18, 122);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(697, 61);
+            this.label2.Size = new System.Drawing.Size(790, 40);
             this.label2.TabIndex = 12;
             this.label2.Text = "Để quản lý chặt chẽ việc xuất/nhập cảnh của công dân trong và ngoài nước";
             // 
@@ -123,7 +125,7 @@ namespace EntryExitCivy.EntryExitCivy
             this.label4.AllowDrop = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(18, 223);
+            this.label4.Location = new System.Drawing.Point(18, 227);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(320, 61);
@@ -135,7 +137,7 @@ namespace EntryExitCivy.EntryExitCivy
             this.label5.AllowDrop = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(59, 262);
+            this.label5.Location = new System.Drawing.Point(59, 265);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(459, 60);
@@ -147,7 +149,7 @@ namespace EntryExitCivy.EntryExitCivy
             this.label6.AllowDrop = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(59, 305);
+            this.label6.Location = new System.Drawing.Point(59, 325);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(662, 60);
@@ -159,7 +161,7 @@ namespace EntryExitCivy.EntryExitCivy
             this.label7.AllowDrop = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(59, 365);
+            this.label7.Location = new System.Drawing.Point(59, 385);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(699, 49);
@@ -168,16 +170,22 @@ namespace EntryExitCivy.EntryExitCivy
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Location = new System.Drawing.Point(35, 31);
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btnExit);
+            this.panel1.Controls.Add(this.btnEntry);
+            this.panel1.Controls.Add(this.btnNation);
+            this.panel1.Location = new System.Drawing.Point(12, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 422);
+            this.panel1.Size = new System.Drawing.Size(278, 456);
             this.panel1.TabIndex = 18;
             // 
             // panel2
             // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
@@ -187,22 +195,22 @@ namespace EntryExitCivy.EntryExitCivy
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(296, 31);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(762, 422);
+            this.panel2.Size = new System.Drawing.Size(832, 456);
             this.panel2.TabIndex = 19;
             // 
             // HomePage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1120, 499);
+            this.ClientSize = new System.Drawing.Size(1140, 499);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "HomePage";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomePage";
             this.Load += new System.EventHandler(this.HomePage_Load);
             this.panel1.ResumeLayout(false);
@@ -213,9 +221,9 @@ namespace EntryExitCivy.EntryExitCivy
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnNation;
+        private System.Windows.Forms.Button btnEntry;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

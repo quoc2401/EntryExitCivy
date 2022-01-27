@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace EntryExitCivy.EntryExitCivy
+namespace EntryExitCivy
 {
     public partial class HomePage : Form
     {
+        int width = 1080;
+        int height = 540;
+
         public HomePage()
         {
             InitializeComponent();
@@ -19,6 +22,47 @@ namespace EntryExitCivy.EntryExitCivy
         private void HomePage_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            ExitForm exitform = new ExitForm();
+            exitform.FormClosing += new FormClosingEventHandler(exitform_FormClosing);
+            exitform.Size = new Size(width, height);
+            this.Hide();
+            exitform.Show();
+        }
+
+        private void exitform_FormClosing(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void btnEntry_Click(object sender, EventArgs e)
+        {
+            EntryForm entryform = new EntryForm();
+            entryform.FormClosing += new FormClosingEventHandler(entryform_FormClosing);
+            entryform.Size = new Size(width, height);
+            this.Hide();
+            entryform.Show();
+        }
+
+        private void entryform_FormClosing(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void btnNation_Click(object sender, EventArgs e)
+        {
+            NationsForm nationsform = new NationsForm();
+            nationsform.FormClosing += new FormClosingEventHandler(nationsform_FormClosing);
+            this.Hide();
+            nationsform.Show();
+        }
+
+        private void nationsform_FormClosing(object sender, EventArgs e)
+        {
+            this.Show();
         }
     }
 }

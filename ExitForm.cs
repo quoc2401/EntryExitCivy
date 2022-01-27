@@ -51,13 +51,12 @@ namespace EntryExitCivy
 
         private void ExitForm_Load(object sender, EventArgs e)
         {
-            table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Passport", typeof(string));
+            table.Columns.Add("Id", typeof(string));
             table.Columns.Add("Name", typeof(string));
 
-            table.Rows.Add(1234, "A1234", "Ho Nguyen Cong Sang");
-            table.Rows.Add(1235, "A1235", "Ho Cong Hoang");
-            table.Rows.Add(1237, "A1237", "Haha");
+            table.Rows.Add("A1234", "Ho Nguyen Cong Sang");
+            table.Rows.Add("A1235", "Ho Cong Hoang");
+            table.Rows.Add("A1237", "Haha");
 
             exitData.DataSource = table;
 
@@ -103,39 +102,47 @@ namespace EntryExitCivy
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string passport_no = txtPassport.Text;
-            string name = Utils.ChuanHoa(txtName.Text);
-            string gender = rdbMale.Checked ? "Nam" : "Nữ";
-            string birthday = dtpBirthday.Value.ToString("yyyy-MM-dd");
-            string nationality = cbNationality.Text;
-            string phone = txtPhone.Text;
-            string address = Utils.ChuanHoa(txtAddress.Text);
-            string occupation = Utils.ChuanHoa(txtOccupation.Text);
-            string departure_day = dtpDepartDate.Value.ToString("yyyy-MM-dd");
-            string destination = Utils.ChuanHoa(txtDestination.Text);
-            string visa_expriration = dtpVisaExpire.Value.ToString("yyyy-MM-dd");
-            string passport_expriration = dtpPassportExpire.Value.ToString("yyyy-MM-dd");
-            string purpose = cbPurpose.Text;
-
-            string exist = MySqlUtils.CivyExist(passport_no);
             try
             {
+                string passport_no = txtPassport.Text;
+                string name = txtName.Text;
+                bool gender = rdbMale.Checked ? true : false;
+                DateTime birthday = dtpBirthday.Value;
+                string nationality = cbNationality.SelectedValue.ToString();
+                string phone = txtPhone.Text;
+                string address = txtAddress.Text;
+                string occupation = txtOccupation.Text;
+                DateTime depart_date = dtpDepartDate.Value;
+                string destination = txtDestination.Text;
+                DateTime visa_expriration = dtpVisaExpire.Value;
+                DateTime passport_expriration = dtpPassportExpire.Value;
+                Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose), cbPurpose.Text, true);
+
+                Civy c = new Civy(id: passport_no, fullname: name, gender: gender, birthday: birthday
+                                 , nationality: nationality, phone: phone, home_address: address, occupation: occupation);
+
+                Exit ex = new Exit(civy_id: passport_no, depart_date: depart_date, visa_expiration: visa_expriration
+                                    , passport_expiration: passport_expriration, purpose: purpose, destination: destination);
+
+                string exist = MySqlUtils.CivyExist(passport_no);
+
                 if (exist == passport_no)
                 {
-                    
-                    //MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
+
+                    MySqlUtils.AddExit(ex);
                 }
                 else
                 {
-                    //MySqlUtils.AddNewCivy(passport_no, name, gender, birthday, "VN", phone, address, occupation);
-                    //MySqlUtils.AddExit(passport_no, departure_day, destination, visa_expriration, passport_expriration, purpose);
+                    MySqlUtils.AddNewCivy(c);
+                    MySqlUtils.AddExit(ex);
                 }
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(text: ex.Message, caption: "Error");
-            } 
+                MySqlUtils.CloseConn();
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -145,7 +152,7 @@ namespace EntryExitCivy
                 for (int i = 0; i < exitData.SelectedRows.Count; i++)
                 {
                     int selectedIndex = exitData.SelectedRows[i].Index;
-                    int id = int.Parse(exitData[0, selectedIndex].Value.ToString());
+                    string id = exitData[0, selectedIndex].Value.ToString();
                     MySqlUtils.DeleteExit(id);
                 }
                 MessageBox.Show(text: "Xóa thành công!", caption: "Inform");

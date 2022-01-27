@@ -53,22 +53,18 @@ namespace EntryExitCivy
 
         private void EntryForm_Load(object sender, EventArgs e)
         {
-            table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Passport", typeof(string));
+            table.Columns.Add("Id", typeof(string));
             table.Columns.Add("Name", typeof(string));
 
-            table.Rows.Add(1234, "A1234", "Ho Nguyen Cong Sang");
-            table.Rows.Add(1235, "A1235", "Ho Cong Hoang");
+            table.Rows.Add("A1234", "Ho Nguyen Cong Sang");
+            table.Rows.Add("A1235", "Ho Cong Hoang");
 
             entryData.DataSource = table;
 
             try
             {
                 DataTable data = MySqlUtils.GetNationsItems();
-                //Utils.AddComboBoxItems(cbNationality, data);
-                cbNationality.ValueMember = "id";
-                cbNationality.DisplayMember = "name";
-                cbNationality.DataSource = data;
+                Utils.AddComboBoxItems(cbNationality, data);
             }
             catch (MySqlException ex)
             {
@@ -158,7 +154,7 @@ namespace EntryExitCivy
                 for (int i = 0; i < entryData.SelectedRows.Count; i++)
                 {
                     int selectedIndex = entryData.SelectedRows[i].Index;
-                    int id = int.Parse(entryData[0, selectedIndex].Value.ToString());
+                    string id = entryData[0, selectedIndex].Value.ToString();
                     MySqlUtils.DeleteEntry(id);
                 }
                 MessageBox.Show(text: "Xóa thành công!", caption: "Inform");
@@ -244,6 +240,5 @@ namespace EntryExitCivy
         {
             Utils.RemovePlaceholder((TextBox)sender);
         }
-
     }
 }
