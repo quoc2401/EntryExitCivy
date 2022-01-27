@@ -28,6 +28,11 @@ namespace EntryExitCivy
             dgridNation.Columns["name"].HeaderText = "Tên quốc gia";
             dgridNation.Columns["id"].Width = 110;
             dgridNation.Columns["name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            
+            
+           
+         
         }
 
 
@@ -74,5 +79,52 @@ namespace EntryExitCivy
             ControlPaint.DrawBorder(e.Graphics, this.label2.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            label2.Text = "DANH SÁCH XUẤT CẢNH";
+            var exits = MySqlUtils.GetExits();
+            dgridNation.DataSource = exits;
+            dgridNation.Columns["civy_id"].HeaderText = "Số hộ chiếu";
+            dgridNation.Columns["depart_date"].HeaderText = "Ngày đi";
+            dgridNation.Columns["destination"].HeaderText = "Nơi đi kiến đến";
+            dgridNation.Columns["visa_expiration"].HeaderText = "Hạn visa";
+            dgridNation.Columns["passport_expiration"].HeaderText = "Hạn hộ chiếu";
+            dgridNation.Columns["purpose"].HeaderText = "Mục đích";
+            dgridNation.Columns["civy_id"].Width = 100;
+            dgridNation.Columns["depart_date"].Width = 80;
+            dgridNation.Columns["destination"].Width = 250;
+            dgridNation.Columns["visa_expiration"].Width = 80;
+            dgridNation.Columns["passport_expiration"].Width = 100;
+            dgridNation.Columns["purpose"].Width = 100;
+        }
+
+        private void dgridNation_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void miEntry_Click(object sender, EventArgs e)
+        {
+            label2.Text = "DANH SÁCH NHẬP CẢNH";
+            var entrys = MySqlUtils.GetEntrys();
+            dgridNation.DataSource = entrys;
+            dgridNation.Columns["civy_id"].HeaderText = "Số hộ chiếu";
+            dgridNation.Columns["arrival_date"].HeaderText = "Ngày đến";
+            dgridNation.Columns["expected_destination"].HeaderText = "Nơi đến dự kiến ";
+            dgridNation.Columns["visa_expiration"].HeaderText = "Hạn visa";
+            dgridNation.Columns["passport_expiration"].HeaderText = "Hạn hộ chiếu";
+            dgridNation.Columns["purpose"].HeaderText = "Mục đích";
+            dgridNation.Columns["civy_id"].Width = 100;
+            dgridNation.Columns["arrival_date"].Width = 80;
+            dgridNation.Columns["expected_destination"].Width = 250;
+            dgridNation.Columns["visa_expiration"].Width = 80;
+            dgridNation.Columns["passport_expiration"].Width = 100;
+            dgridNation.Columns["purpose"].Width = 100;
+        }
     }
 }

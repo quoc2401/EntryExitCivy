@@ -458,17 +458,19 @@
             // 
             // entryData
             // 
-            this.entryData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.entryData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.entryData.BackgroundColor = System.Drawing.Color.DarkCyan;
             this.entryData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.entryData.Location = new System.Drawing.Point(796, 63);
             this.entryData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.entryData.Name = "entryData";
+            this.entryData.RowHeadersWidth = 51;
             this.entryData.RowTemplate.Height = 28;
-            this.entryData.Size = new System.Drawing.Size(496, 471);
+            this.entryData.Size = new System.Drawing.Size(538, 469);
             this.entryData.TabIndex = 25;
+            this.entryData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.entryData_CellContentClick);
             // 
             // txtSearch
             // 
@@ -519,7 +521,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1303, 544);
+            this.ClientSize = new System.Drawing.Size(1345, 542);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);

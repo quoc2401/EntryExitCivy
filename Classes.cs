@@ -143,7 +143,64 @@ namespace EntryExitCivy
 
 
     class Exit 
-    { }
+    {
+        private string civy_id;
+        private DateTime depart_date, visa_expiration, passport_expiration;
+        private string destination;
+        private Purpose purpose;
+
+        public string Civy_id
+        {
+            get { return civy_id; }
+            set { civy_id = value; }
+        }
+
+
+        public DateTime Depart_date
+        {
+            get { return depart_date; }
+            set { depart_date = value; }
+        }
+
+        public DateTime Visa_expiration
+        {
+            get { return visa_expiration; }
+            set { visa_expiration = value; }
+        }
+
+        public DateTime Passport_expiration
+        {
+            get { return passport_expiration; }
+            set { passport_expiration = value; }
+        }
+
+        public string Destination
+        {
+            get { return destination; }
+            set { destination = value; }
+        }
+
+
+        public Purpose Purpose
+        {
+            get { return purpose; }
+            set { purpose = value; }
+        }
+
+        public Exit()
+        { }
+
+        public Exit(string civy_id, DateTime depart_date, DateTime visa_expiration
+                    , DateTime passport_expiration, string destination, Purpose purpose)
+        {
+            this.civy_id = civy_id;
+            this.depart_date = depart_date;
+            this.visa_expiration = visa_expiration;
+            this.passport_expiration = passport_expiration;
+            this.destination = destination;
+            this.purpose = purpose;
+        }
+    }
 
 
     class Nation

@@ -461,17 +461,19 @@
             // 
             // exitData
             // 
-            this.exitData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.exitData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.exitData.BackgroundColor = System.Drawing.Color.DarkCyan;
             this.exitData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.exitData.Location = new System.Drawing.Point(795, 63);
             this.exitData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exitData.Name = "exitData";
+            this.exitData.RowHeadersWidth = 51;
             this.exitData.RowTemplate.Height = 28;
             this.exitData.Size = new System.Drawing.Size(496, 470);
             this.exitData.TabIndex = 21;
+            this.exitData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.exitData_CellContentClick);
             // 
             // panel1
             // 
@@ -516,6 +518,7 @@
             this.btnReset.TabIndex = 31;
             this.btnReset.Text = "Nhập lại";
             this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // ExitForm
             // 

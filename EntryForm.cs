@@ -52,33 +52,45 @@ namespace EntryExitCivy
                 b.Cursor = Cursors.Hand;
             }
         }
-
+        private void dgridNation_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            entryData.ClearSelection();
+        }
+        private void dgridNation_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataTable changes = ((DataTable)entryData.DataSource).GetChanges();
+                if (changes != null)
+                {
+                    MySqlUtils.UpdateNation(changes);
+                    ((DataTable)entryData.DataSource).AcceptChanges();
+                    MessageBox.Show("Cập nhật thành công", "Inform");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cập nhật thất bại, chi tiết lỗi:\n" + ex.Message, "Error");
+            }
+        }
 
         private void EntryForm_Load(object sender, EventArgs e)
         {
-            table.Columns.Add("Id", typeof(int));
-            table.Columns.Add("Passport", typeof(string));
-            table.Columns.Add("Name", typeof(string));
-
-            table.Rows.Add(1234, "A1234", "Ho Nguyen Cong Sang");
-            table.Rows.Add(1235, "A1235", "Ho Cong Hoang");
-
-            entryData.DataSource = table;
-
-            try
-            {
-                DataTable data = MySqlUtils.GetNationsItems();
-                //Utils.AddComboBoxItems(cbNationality, data);
-                cbNationality.ValueMember = "id";
-                cbNationality.DisplayMember = "name";
-                cbNationality.DataSource = data;
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(text: ex.Message, caption: "Error");
-            }
-
-            cbPurpose.DataSource = Enum.GetValues(typeof(Purpose));
+            var entrys = MySqlUtils.GetEntrys();
+            entryData.DataSource = entrys;
+            entryData.Columns["civy_id"].HeaderText = "Số hộ chiếu";
+            entryData.Columns["arrival_date"].HeaderText = "Ngày đến";
+            entryData.Columns["expected_destination"].HeaderText = "Nơi đến dự kiến ";
+            entryData.Columns["visa_expiration"].HeaderText = "Hạn visa";
+            entryData.Columns["passport_expiration"].HeaderText = "Hạn hộ chiếu";
+            entryData.Columns["purpose"].HeaderText = "Mục đích";
+            entryData.Columns["civy_id"].Width = 100;
+            entryData.Columns["arrival_date"].Width = 80;
+            entryData.Columns["expected_destination"].Width = 250;
+            entryData.Columns["visa_expiration"].Width = 80;
+            entryData.Columns["passport_expiration"].Width = 100;
+            entryData.Columns["purpose"].Width = 100;
         }
 
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
@@ -217,6 +229,12 @@ namespace EntryExitCivy
             ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
         }
 
+        private void entryData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
+        }
+
+
 
         //private void btnAdd_Click(object sender, EventArgs e)
         //{
@@ -224,4 +242,5 @@ namespace EntryExitCivy
         //    Console.WriteLine(d.ToString("yyyy-mm-dd"));
         //}
     }
+
 }

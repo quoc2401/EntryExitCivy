@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "quoc2401";
+            password = "123456789";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database
@@ -202,6 +202,92 @@ namespace EntryExitCivy
             }
             CloseConn();
             return nations;
+        }
+        public static DataTable GetEntrys()
+        {
+            string query = "Select * from eedata.entry";
+            var entrys = new DataTable();
+
+            if (OpenConn())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
+                mda.Fill(entrys);
+                mda.Dispose();
+            }
+            CloseConn();
+            return entrys;
+        }
+
+        public static void UpdateEntrys(DataTable changes)
+        {
+            MySqlCommand cmd = new MySqlCommand("Select * from eedata.entry;", conn);
+            MySqlDataAdapter mda = new MySqlDataAdapter();
+            mda.SelectCommand = cmd;
+            MySqlCommandBuilder mcb = new MySqlCommandBuilder(mda);
+            mda.UpdateCommand = mcb.GetUpdateCommand();
+            mda.Update(changes);
+        }
+
+        public static DataTable GetEntryItems()
+        {
+            string query = "Select * from eedata.entry";
+            var entrys = new DataTable();
+
+            if (OpenConn())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
+                mda.SelectCommand = cmd;
+                mda.Fill(entrys);
+                mda.Dispose();
+                cmd.Dispose();
+            }
+            CloseConn();
+            return entrys;
+        }
+        public static DataTable GetExits()
+        {
+            string query = "Select * from eedata.exit";
+            var exits = new DataTable();
+
+            if (OpenConn())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
+                mda.Fill(exits);
+                mda.Dispose();
+            }
+            CloseConn();
+            return exits;
+        }
+
+        public static void UpdateExits(DataTable changes)
+        {
+            MySqlCommand cmd = new MySqlCommand("Select * from eedata.exit;", conn);
+            MySqlDataAdapter mda = new MySqlDataAdapter();
+            mda.SelectCommand = cmd;
+            MySqlCommandBuilder mcb = new MySqlCommandBuilder(mda);
+            mda.UpdateCommand = mcb.GetUpdateCommand();
+            mda.Update(changes);
+        }
+
+        public static DataTable GetExitItems()
+        {
+            string query = "Select * from eedata.exit";
+            var exits = new DataTable();
+
+            if (OpenConn())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
+                mda.SelectCommand = cmd;
+                mda.Fill(exits);
+                mda.Dispose();
+                cmd.Dispose();
+            }
+            CloseConn();
+            return exits;
         }
     }
 }
