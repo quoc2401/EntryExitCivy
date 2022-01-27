@@ -7,48 +7,25 @@ namespace EntryExitCivy
 {
     class Civy
     {
-        private string id, fullname, nationality, phone, home_address, occupation;
-        private bool gender;
+        private string id;
+        private string fullname, phone, home_address, occupation;
+        private string nationality;
         private DateTime birthday;
 
-        public Civy() { }
+        public Civy()
+        { }
 
-        public Civy(string id, string fullname, bool gender, DateTime birthday,
-            string nationality, string phone, string home_address, string ocupation)
+        public Civy(string id, string fullname, string nationality, string phone
+                    , string home_address, string occupation, bool gender, DateTime birthday)
         {
             this.id = id;
             this.fullname = fullname;
-            this.gender = gender;
-            this.birthday = birthday;
             this.nationality = nationality;
             this.phone = phone;
             this.home_address = home_address;
             this.occupation = occupation;
-
-        }
-
-        public string Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public string Name
-        {
-            get { return fullname; }
-            set { fullname = value; }
-        }
-
-        public bool Gender
-        {
-            get { return gender; }
-            set { gender = value; }
-        }
-
-        public DateTime Birthday
-        {
-            get { return birthday; }
-            set { birthday = value; }
+            this.gender = gender;
+            this.birthday = birthday;
         }
 
         public string Nationality
@@ -57,41 +34,70 @@ namespace EntryExitCivy
             set { nationality = value; }
         }
 
-        public string Phone
+        public DateTime Birthday
         {
-            get { return phone; }
-            set { phone = value; }
+            get { return birthday; }
+            set { birthday = value; }
         }
 
-        public string Address
+        public string Id
         {
-            get { return home_address; }
-            set { home_address = value; }
+            get { return id; }
+            set { id = value; }
         }
+
 
         public string Occupation
         {
             get { return occupation; }
             set { occupation = value; }
         }
+
+        public string Home_address
+        {
+            get { return home_address; }
+            set { home_address = value; }
+        }
+
+        public string Phone
+        {
+            get { return phone; }
+            set { phone = value; }
+        }
+
+        public string Fullname
+        {
+            get { return fullname; }
+            set { fullname = value; }
+        }
+        private bool gender;
+
+        public bool Gender
+        {
+            get { return gender; }
+            set { gender = value; }
+        }
     }
 
 
     class Entry
     {
-        private string civy_id, expected_destination, purpose;
+        private string civy_id;
         private DateTime arrival_date, visa_expiration, passport_expiration;
+        private string expected_destination;
+        private Purpose purpose;
 
-        public Entry() { }
+        public Entry()
+        { }
 
-        public Entry(string civy_id, DateTime arrival_date, string expected_destination, 
-            DateTime visa_expiration, DateTime passport_expiration, string purpose)
+        public Entry(string civy_id, DateTime arrival_date, DateTime visa_expiration
+                    , DateTime passport_expiration, string expected_destination, Purpose purpose)
         {
             this.civy_id = civy_id;
             this.arrival_date = arrival_date;
-            this.expected_destination = expected_destination;
             this.visa_expiration = visa_expiration;
             this.passport_expiration = passport_expiration;
+            this.expected_destination = expected_destination;
             this.purpose = purpose;
         }
 
@@ -99,18 +105,6 @@ namespace EntryExitCivy
         {
             get { return civy_id; }
             set { civy_id = value; }
-        }
-
-        public string Expected_destination
-        {
-            get { return expected_destination; }
-            set { expected_destination = value; }
-        }
-
-        public string Purpose
-        {
-            get { return purpose; }
-            set { purpose = value; }
         }
 
         public DateTime Arrival_date
@@ -129,19 +123,35 @@ namespace EntryExitCivy
         {
             get { return passport_expiration; }
             set { passport_expiration = value; }
+
+        } 
+
+        public string Expected_destination
+        {
+            get { return expected_destination; }
+            set { expected_destination = value; }
+        }
+        
+
+        public Purpose Purpose
+        {
+            get { return purpose; }
+            set { purpose = value; }
         }
     }
 
 
     class Exit 
     {
-        private string civy_id, destination, purpose;
+        private string civy_id, destination;
         private DateTime depart_date, visa_expiration, passport_expiration;
+        private Purpose purpose;
 
-        public Exit() { }
+        public Exit()
+        { }
 
         public Exit(string civy_id, DateTime depart_date, string destination, 
-            DateTime visa_expiration, DateTime passport_expiration, string purpose)
+            DateTime visa_expiration, DateTime passport_expiration, Purpose purpose)
         {
             this.civy_id = civy_id;
             this.depart_date = depart_date;
@@ -163,7 +173,7 @@ namespace EntryExitCivy
             set { destination = value; }
         }
 
-        public string Purpose
+        public Purpose Purpose
         {
             get { return purpose; }
             set { purpose = value; }
@@ -192,7 +202,16 @@ namespace EntryExitCivy
     class Nation
     {
         private string id;
-        private string name;      
+        private string name;
+
+        public Nation()
+        { }
+
+        public Nation(string id, string name)
+        {
+            this.id = id;
+            this.name = name;
+        }
 
         public string Id
         {
@@ -205,20 +224,14 @@ namespace EntryExitCivy
             get { return name; }
             set { name = value; }
         }
-
-        public Nation(string id, string name)
-        {
-            this.id = id;
-            this.name = name;
-        }
     }
 
     public enum Purpose
     { 
         STUDY = 1,
-        WORKING = 2,
-        TRAVEL = 3,
-        OTHER = 4,
+        EMPLOYMENT = 2,
+        BUSINESS = 3,
+        TRAVEL = 4,
+        OTHER = 5
     }
-
 }
