@@ -53,14 +53,29 @@ namespace EntryExitCivy
 
         private void miNation_Click(object sender, EventArgs e)
         {
-            NationsForm nextForm = new NationsForm();
-            nextForm.Size = this.Size;
-            nextForm.Top = this.Top;
-            nextForm.Left = this.Left;
-            nextForm.WindowState = this.WindowState;
-            this.Hide();
-            nextForm.ShowDialog();
-            this.Close();
+            Utils.menuClick(this, miNation);
+        }
+
+        private void miExit_Click(object sender, EventArgs e)
+        {
+            Utils.menuClick(this, miExit);
+        }
+
+        private void miEntry_Click(object sender, EventArgs e)
+        {
+            Utils.menuClick(this, miEntry);
+        }
+
+
+
+        private void dgridNation_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dgridNation.ClearSelection();
+        }
+
+        private void label2_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, this.label2.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
         }
 
     }

@@ -15,7 +15,7 @@ namespace EntryExitCivy
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1()); //Form hiển thị ban đầu
+            Application.Run(new NationsForm()); //Form hiển thị ban đầu
         }
     }
 }
