@@ -53,7 +53,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtOccupation = new System.Windows.Forms.TextBox();
-            this.txtDestination = new System.Windows.Forms.TextBox();
             this.txtPassport = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -67,6 +66,7 @@
             this.miEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miNation = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbDestination = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.gbGender.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitData)).BeginInit();
@@ -76,6 +76,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbDestination);
             this.groupBox1.Controls.Add(this.txtAddress);
             this.groupBox1.Controls.Add(this.cbPurpose);
             this.groupBox1.Controls.Add(this.cbNationality);
@@ -98,7 +99,6 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtOccupation);
-            this.groupBox1.Controls.Add(this.txtDestination);
             this.groupBox1.Controls.Add(this.txtPassport);
             this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.txtName);
@@ -352,15 +352,6 @@
             this.txtOccupation.TabIndex = 3;
             this.txtOccupation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOccupation_KeyPress);
             // 
-            // txtDestination
-            // 
-            this.txtDestination.Location = new System.Drawing.Point(555, 210);
-            this.txtDestination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtDestination.Name = "txtDestination";
-            this.txtDestination.Size = new System.Drawing.Size(167, 22);
-            this.txtDestination.TabIndex = 11;
-            this.txtDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDestination_KeyPress);
-            // 
             // txtPassport
             // 
             this.txtPassport.Location = new System.Drawing.Point(555, 93);
@@ -392,7 +383,7 @@
             // 
             this.btnAdd.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(564, 370);
+            this.btnAdd.Location = new System.Drawing.Point(613, 370);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(117, 57);
@@ -411,6 +402,7 @@
             this.exitData.Location = new System.Drawing.Point(762, 90);
             this.exitData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.exitData.Name = "exitData";
+            this.exitData.RowHeadersWidth = 51;
             this.exitData.RowTemplate.Height = 28;
             this.exitData.Size = new System.Drawing.Size(421, 357);
             this.exitData.TabIndex = 21;
@@ -452,6 +444,7 @@
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Location = new System.Drawing.Point(313, 6);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -465,7 +458,7 @@
             // 
             this.btnReset.BackColor = System.Drawing.Color.DarkCyan;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(408, 370);
+            this.btnReset.Location = new System.Drawing.Point(459, 370);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(117, 57);
@@ -508,6 +501,18 @@
             this.miNation.Size = new System.Drawing.Size(151, 24);
             this.miNation.Text = "Danh sách quốc gia";
             this.miNation.Click += new System.EventHandler(this.miNation_Click);
+            // 
+            // cbDestination
+            // 
+            this.cbDestination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDestination.FormattingEnabled = true;
+            this.cbDestination.Items.AddRange(new object[] {
+            "VN"});
+            this.cbDestination.Location = new System.Drawing.Point(555, 206);
+            this.cbDestination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbDestination.Name = "cbDestination";
+            this.cbDestination.Size = new System.Drawing.Size(167, 24);
+            this.cbDestination.TabIndex = 14;
             // 
             // ExitForm
             // 
@@ -562,7 +567,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtOccupation;
-        private System.Windows.Forms.TextBox txtDestination;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnAdd;
@@ -581,6 +585,7 @@
         private System.Windows.Forms.ToolStripMenuItem miEntry;
         private System.Windows.Forms.ToolStripMenuItem miExit;
         private System.Windows.Forms.ToolStripMenuItem miNation;
+        private System.Windows.Forms.ComboBox cbDestination;
 
     }
 }

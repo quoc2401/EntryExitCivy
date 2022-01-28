@@ -80,7 +80,7 @@
             this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(242, 18);
+            this.txtAddress.Size = new System.Drawing.Size(242, 22);
             this.txtAddress.TabIndex = 5;
             // 
             // cbPurpose
@@ -248,7 +248,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(24, 262);
+            this.label11.Location = new System.Drawing.Point(21, 264);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(109, 17);
             this.label11.TabIndex = 1;
@@ -258,7 +258,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(24, 227);
+            this.label10.Location = new System.Drawing.Point(21, 229);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(76, 17);
             this.label10.TabIndex = 1;
@@ -268,7 +268,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(24, 190);
+            this.label8.Location = new System.Drawing.Point(21, 192);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(82, 17);
             this.label8.TabIndex = 1;
@@ -412,11 +412,13 @@
             this.entryData.Location = new System.Drawing.Point(755, 83);
             this.entryData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.entryData.Name = "entryData";
+            this.entryData.RowHeadersWidth = 51;
             this.entryData.RowTemplate.Height = 28;
             this.entryData.Size = new System.Drawing.Size(429, 365);
             this.entryData.TabIndex = 34;
             this.entryData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.entryData_CellClick);
             this.entryData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.entryData_DataBindingComplete);
+            this.entryData.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.entryData_RowValidated);
             // 
             // txtSearch
             // 
@@ -437,6 +439,7 @@
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.Location = new System.Drawing.Point(315, 5);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

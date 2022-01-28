@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mnFuncs = new System.Windows.Forms.MenuStrip();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgridNation = new System.Windows.Forms.DataGridView();
             this.miEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miNation = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgridNation = new System.Windows.Forms.DataGridView();
-            this.mnFuncs.SuspendLayout();
+            this.mnFuncs = new System.Windows.Forms.MenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.dgridNation)).BeginInit();
+            this.mnFuncs.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnFuncs
@@ -86,23 +86,39 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "DANH SÁCH QUỐC GIA";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             this.label2.Paint += new System.Windows.Forms.PaintEventHandler(this.label2_Paint);
             // 
             // dgridNation
             // 
-            this.dgridNation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgridNation.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgridNation.BackgroundColor = System.Drawing.Color.DarkCyan;
             this.dgridNation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgridNation.Location = new System.Drawing.Point(12, 126);
             this.dgridNation.Margin = new System.Windows.Forms.Padding(56, 62, 56, 62);
             this.dgridNation.Name = "dgridNation";
+            this.dgridNation.RowHeadersWidth = 51;
             this.dgridNation.RowTemplate.Height = 24;
             this.dgridNation.Size = new System.Drawing.Size(842, 435);
             this.dgridNation.TabIndex = 4;
+            this.dgridNation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgridNation_CellContentClick);
             this.dgridNation.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgridNation_DataBindingComplete);
             this.dgridNation.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgridNation_RowValidated);
+            // 
+            // mnFuncs
+            // 
+            this.mnFuncs.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mnFuncs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miEntry,
+            this.miExit,
+            this.miNation});
+            this.mnFuncs.Location = new System.Drawing.Point(0, 0);
+            this.mnFuncs.Name = "mnFuncs";
+            this.mnFuncs.Size = new System.Drawing.Size(995, 28);
+            this.mnFuncs.TabIndex = 0;
+            this.mnFuncs.Text = "Các chức năng";
             // 
             // NationsForm
             // 
@@ -119,21 +135,20 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NationsForm";
             this.Load += new System.EventHandler(this.NationsForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgridNation)).EndInit();
             this.mnFuncs.ResumeLayout(false);
             this.mnFuncs.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgridNation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip mnFuncs;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgridNation;
         private System.Windows.Forms.ToolStripMenuItem miEntry;
         private System.Windows.Forms.ToolStripMenuItem miExit;
         private System.Windows.Forms.ToolStripMenuItem miNation;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dgridNation;
+        private System.Windows.Forms.MenuStrip mnFuncs;
     }
 }

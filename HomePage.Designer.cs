@@ -143,6 +143,7 @@
             this.label5.Size = new System.Drawing.Size(459, 60);
             this.label5.TabIndex = 15;
             this.label5.Text = "Thông tin cần có của công dân để xuất cảnh";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
