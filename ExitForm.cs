@@ -51,19 +51,46 @@ namespace EntryExitCivy
 
         private void ExitForm_Load(object sender, EventArgs e)
         {
-            table.Columns.Add("Id", typeof(string));
-            table.Columns.Add("Name", typeof(string));
+            var exits = MySqlUtils.GetExits();     
+            string[] selectedColumns = new[] { "civy_id", "fullname", "depart_date", "destination", "visa_expiration",
+                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation", "destination_id"};
+            exits = new DataView(exits).ToTable(false, selectedColumns);
+            exitData.DataSource = exits;
 
-            table.Rows.Add("A1234", "Ho Nguyen Cong Sang");
-            table.Rows.Add("A1235", "Ho Cong Hoang");
-            table.Rows.Add("A1237", "Haha");
+            //đổi tên cột
+            exitData.Columns["civy_id"].HeaderText = "Số hộ chiếu";
+            exitData.Columns["fullname"].HeaderText = "Họ tên";
+            exitData.Columns["depart_date"].HeaderText = "Ngày đi";
+            exitData.Columns["destination"].HeaderText = "Nơi đến";
+            exitData.Columns["visa_expiration"].HeaderText = "Hạn visa";
+            exitData.Columns["passport_expiration"].HeaderText = "Hạn hộ chiếu";
+            exitData.Columns["purpose"].HeaderText = "Mục đích";
 
-            exitData.DataSource = table;
+            //ẩn những cột không hiển thị nhưng vẫn dùng
+            exitData.Columns["nationality"].Visible = false;
+            exitData.Columns["gender"].Visible = false;
+            exitData.Columns["birthday"].Visible = false;
+            exitData.Columns["phone"].Visible = false;
+            exitData.Columns["home_address"].Visible = false;
+            exitData.Columns["occupation"].Visible = false;
+            exitData.Columns["destination_id"].Visible = false;
+
+            //điều chỉnh chiều rộng cột
+            exitData.Columns["civy_id"].Width = 100;
+            exitData.Columns["fullname"].Width = 200;
+            exitData.Columns["depart_date"].Width = 80;
+            exitData.Columns["destination"].Width = 200;
+            exitData.Columns["visa_expiration"].Width = 80;
+            exitData.Columns["passport_expiration"].Width = 100;
+            exitData.Columns["purpose"].Width = 100;
 
             try
             {
-                DataTable data = MySqlUtils.GetNationsItems();
-                Utils.AddComboBoxItems(cbNationality, data);
+                DataTable data1 = MySqlUtils.GetNationsItems();
+                Utils.AddComboBoxItems(cbNationality, data1);
+                DataTable data2 = MySqlUtils.GetNationsItems();
+                Utils.AddComboBoxItems(cbDestination, data2);
             }
             catch (MySqlException ex)
             {
@@ -71,9 +98,11 @@ namespace EntryExitCivy
             }
 
             cbPurpose.DataSource = Enum.GetValues(typeof(Purpose));
+            exitData.RowValidated += exitData_RowValidated;
         }
 
 
+        //phần kiểm soát nhập liệu
         private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
             Utils.LetterOnly(e);
@@ -100,6 +129,7 @@ namespace EntryExitCivy
         }
 
 
+        //phần buttons
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -113,7 +143,7 @@ namespace EntryExitCivy
                 string address = txtAddress.Text;
                 string occupation = txtOccupation.Text;
                 DateTime depart_date = dtpDepartDate.Value;
-                string destination = txtDestination.Text;
+                string destination = cbDestination.SelectedValue.ToString();
                 DateTime visa_expriration = dtpVisaExpire.Value;
                 DateTime passport_expriration = dtpPassportExpire.Value;
                 Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose), cbPurpose.Text, true);
@@ -166,6 +196,7 @@ namespace EntryExitCivy
         private void btnReset_Click(object sender, EventArgs e)
         {
             Utils.Clear(groupBox1);
+            rdbMale.Select();
         }
 
         private void btnUnselect_Click(object sender, EventArgs e)
@@ -176,15 +207,17 @@ namespace EntryExitCivy
 
             btnAdd.Show();
             btnReset.Show();
-
-            foreach (var t in this.Controls.OfType<TextBox>())
-                t.Text = "";
-            foreach (var c in this.Controls.OfType<ComboBox>())
-                c.SelectedIndex = 0;
-
+            rdbMale.Select();
             exitData.ClearSelection();
+            Utils.Clear(groupBox1);
         }
 
+
+        //phần datagridview
+        private void exitData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            exitData.ClearSelection();
+        }
 
         private void exitData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -193,9 +226,62 @@ namespace EntryExitCivy
             btnEdit.Show();
             btnDelete.Show();
             btnUnselect.Show();
+
+            //hiển thị data lên Groupbox
+            if (e.RowIndex >= 0)
+            {
+                
+                try
+                {
+                    DataGridViewRow row = exitData.Rows[e.RowIndex];
+                    txtPassport.Text = row.Cells[0].Value.ToString();
+                    txtName.Text = row.Cells[1].Value.ToString();
+                    dtpDepartDate.Value = DateTime.Parse(row.Cells[2].Value.ToString());
+                    cbNationality.SelectedValue = row.Cells[7].Value;
+                    if (row.Cells[8].Value.ToString() == "1")
+                        rdbMale.Select();
+                    else
+                        rdbFemale.Select();
+                    dtpBirthday.Value = DateTime.Parse(row.Cells[9].Value.ToString());
+                    txtPhone.Text = row.Cells[10].Value.ToString();
+                    txtAddress.Text = row.Cells[11].Value.ToString();
+                    txtOccupation.Text = row.Cells[12].Value.ToString();
+                    dtpVisaExpire.Value = DateTime.Parse(row.Cells[4].Value.ToString());
+                    dtpPassportExpire.Value = DateTime.Parse(row.Cells[5].Value.ToString());
+                    for (int i = 0; i < cbPurpose.Items.Count; i++)
+                        if (cbPurpose.Items[i].ToString() == row.Cells[6].Value.ToString())
+                            cbPurpose.SelectedIndex = i;
+                    cbDestination.SelectedValue = row.Cells[13].Value;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
+            } 
+        }
+
+        private void exitData_RowValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                DataTable changes = ((DataTable)exitData.DataSource).GetChanges();
+                if (changes != null)
+                {
+                    //MySqlUtils.UpdateExits(changes);
+                    ((DataTable)exitData.DataSource).AcceptChanges();
+                    //MessageBox.Show("Cập nhật thành công", "Inform");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cập nhật thất bại, chi tiết lỗi:\n" + ex.Message, "Error");
+            }
         }
 
 
+        //phần menuitem click
         private void miEntry_Click(object sender, EventArgs e)
         {
             Utils.menuClick(this, miEntry);
@@ -212,12 +298,14 @@ namespace EntryExitCivy
         }
 
 
+        //đổi màu viền panel
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, this.panel1.ClientRectangle, Color.WhiteSmoke, ButtonBorderStyle.Solid);
         }
 
 
+        //phần searchbox
         private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
         {
             Utils.LetterAndNumber(e);
@@ -231,13 +319,7 @@ namespace EntryExitCivy
         private void txtSearch_Leave(object sender, EventArgs e)
         {
             Utils.AddPlaceholder((TextBox)sender);
-        }
-
-
-        private void exitData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            exitData.ClearSelection();
-        }
-
+        }   
+    
     }
 }

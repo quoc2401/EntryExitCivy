@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace EntryExitCivy
 {
@@ -227,11 +228,16 @@ namespace EntryExitCivy
     }
 
     public enum Purpose
-    { 
-        STUDY = 1,
-        EMPLOYMENT = 2,
-        BUSINESS = 3,
-        TRAVEL = 4,
-        OTHER = 5
+    {
+        [Description("Học tập")]
+        STUDY,
+        [Description("Lao động")]
+        EMPLOYMENT,
+        [Description("Công tác")]
+        BUSINESS,
+        [Description("Du lịch")]
+        TRAVEL,
+        [Description("Khác")]
+        OTHER
     }
 }
