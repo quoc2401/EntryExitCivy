@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "123456789";
+            password = "quoc2401";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database
@@ -204,9 +204,12 @@ namespace EntryExitCivy
             CloseConn();
             return nations;
         }
+
         public static DataTable GetEntrys()
         {
-            string query = "Select * from eedata.entry";
+            string query = "SELECT e.*, c.* " +
+                           "FROM eedata.entry e, eedata.civy c " +
+                           "WHERE civy_id = c.id;";
             var entrys = new DataTable();
 
             if (OpenConn())
@@ -249,7 +252,10 @@ namespace EntryExitCivy
         }
         public static DataTable GetExits()
         {
-            string query = "Select * from eedata.exit";
+            string query = "SELECT civy_id, depart_date, n.name as 'destination', visa_expiration" +
+                           ", passport_expiration, purpose, c.*, n.id as 'destination_id' " +
+                           "FROM eedata.exit e, eedata.civy c, eedata.nation n " +
+                           "WHERE civy_id = c.id and n.id = e.destination;";
             var exits = new DataTable();
 
             if (OpenConn())
@@ -265,7 +271,7 @@ namespace EntryExitCivy
 
         public static void UpdateExits(DataTable changes)
         {
-            MySqlCommand cmd = new MySqlCommand("Select * from eedata.exit;", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM eedata.exit", conn);
             MySqlDataAdapter mda = new MySqlDataAdapter();
             mda.SelectCommand = cmd;
             MySqlCommandBuilder mcb = new MySqlCommandBuilder(mda);

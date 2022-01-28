@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.btnNation = new System.Windows.Forms.Button();
-            this.btnEntry = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.btnNation = new System.Windows.Forms.Button();
+            this.btnEntry = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -56,45 +56,6 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Phần mềm quản lý thông tin người dân xuất nhập cảnh";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // btnNation
-            // 
-            this.btnNation.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnNation.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnNation.Location = new System.Drawing.Point(15, 295);
-            this.btnNation.Name = "btnNation";
-            this.btnNation.Size = new System.Drawing.Size(231, 45);
-            this.btnNation.TabIndex = 8;
-            this.btnNation.TabStop = false;
-            this.btnNation.Text = "Danh sách các quốc gia";
-            this.btnNation.UseVisualStyleBackColor = false;
-            this.btnNation.Click += new System.EventHandler(this.btnNation_Click);
-            // 
-            // btnEntry
-            // 
-            this.btnEntry.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnEntry.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnEntry.Location = new System.Drawing.Point(15, 183);
-            this.btnEntry.Name = "btnEntry";
-            this.btnEntry.Size = new System.Drawing.Size(231, 44);
-            this.btnEntry.TabIndex = 10;
-            this.btnEntry.TabStop = false;
-            this.btnEntry.Text = "Nhập cảnh";
-            this.btnEntry.UseVisualStyleBackColor = false;
-            this.btnEntry.Click += new System.EventHandler(this.btnEntry_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnExit.Location = new System.Drawing.Point(15, 75);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(231, 47);
-            this.btnExit.TabIndex = 11;
-            this.btnExit.TabStop = false;
-            this.btnExit.Text = "Xuất cảnh";
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // label2
             // 
@@ -143,7 +104,6 @@
             this.label5.Size = new System.Drawing.Size(459, 60);
             this.label5.TabIndex = 15;
             this.label5.Text = "Thông tin cần có của công dân để xuất cảnh";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -169,24 +129,12 @@
             this.label7.TabIndex = 17;
             this.label7.Text = "Thông tin nhập cảnh(ngày đến, nơi đến dự kiến, hạn visa và hạn hộ chiếu,...)";
             // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Controls.Add(this.btnEntry);
-            this.panel1.Controls.Add(this.btnNation);
-            this.panel1.Location = new System.Drawing.Point(12, 31);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(278, 456);
-            this.panel1.TabIndex = 18;
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
@@ -199,39 +147,92 @@
             this.panel2.Size = new System.Drawing.Size(832, 456);
             this.panel2.TabIndex = 19;
             // 
+            // btnNation
+            // 
+            this.btnNation.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnNation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNation.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnNation.Location = new System.Drawing.Point(15, 295);
+            this.btnNation.Name = "btnNation";
+            this.btnNation.Size = new System.Drawing.Size(231, 45);
+            this.btnNation.TabIndex = 8;
+            this.btnNation.TabStop = false;
+            this.btnNation.Text = "Danh sách các quốc gia";
+            this.btnNation.UseVisualStyleBackColor = false;
+            this.btnNation.Click += new System.EventHandler(this.btnNation_Click);
+            // 
+            // btnEntry
+            // 
+            this.btnEntry.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnEntry.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEntry.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnEntry.Location = new System.Drawing.Point(15, 183);
+            this.btnEntry.Name = "btnEntry";
+            this.btnEntry.Size = new System.Drawing.Size(231, 44);
+            this.btnEntry.TabIndex = 10;
+            this.btnEntry.TabStop = false;
+            this.btnEntry.Text = "Nhập cảnh";
+            this.btnEntry.UseVisualStyleBackColor = false;
+            this.btnEntry.Click += new System.EventHandler(this.btnEntry_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnExit.Location = new System.Drawing.Point(15, 75);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(231, 47);
+            this.btnExit.TabIndex = 11;
+            this.btnExit.TabStop = false;
+            this.btnExit.Text = "Xuất cảnh";
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnExit);
+            this.panel1.Controls.Add(this.btnEntry);
+            this.panel1.Controls.Add(this.btnNation);
+            this.panel1.Location = new System.Drawing.Point(12, 31);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(278, 456);
+            this.panel1.TabIndex = 18;
+            // 
             // HomePage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(1140, 499);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "HomePage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomePage";
             this.Load += new System.EventHandler(this.HomePage_Load);
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnNation;
-        private System.Windows.Forms.Button btnEntry;
-        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnNation;
+        private System.Windows.Forms.Button btnEntry;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Panel panel1;
     }
 }
