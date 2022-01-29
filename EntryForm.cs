@@ -244,6 +244,17 @@ namespace EntryExitCivy
         {
             if (entryData.Rows.Count > 0)
             {
+                //Full path to the Unicode Arial file
+                string ARIALUNI_TFF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "ARIALUNI_0.TTF");
+
+                //Create a base font object making sure to specify IDENTITY-H
+                BaseFont bf = BaseFont.CreateFont(ARIALUNI_TFF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                //Create a specific font object
+                var fTitle = new iTextSharp.text.Font(bf, 20, iTextSharp.text.Font.BOLD);
+                var fHeader = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.BOLD);
+                var f = new iTextSharp.text.Font(bf, 8, iTextSharp.text.Font.NORMAL);
+
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "PDF (*.pdf)|*.pdf";
                 sfd.FileName = "Entry.pdf";
@@ -266,22 +277,27 @@ namespace EntryExitCivy
                     {
                         try
                         {
-                            PdfPTable pdfTable = new PdfPTable(entryData.Columns.Count);
+                            PdfPTable pdfTable = new PdfPTable(7);
                             pdfTable.DefaultCell.Padding = 3;
                             pdfTable.WidthPercentage = 100;
                             pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
                             foreach (DataGridViewColumn column in entryData.Columns)
                             {
-                                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
-                                pdfTable.AddCell(cell);
+                                if (column.Visible)
+                                {
+                                    PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, fHeader));
+                                    pdfTable.AddCell(cell);
+                                }
                             }
 
                             foreach (DataGridViewRow row in entryData.Rows)
                             {
                                 foreach (DataGridViewCell cell in row.Cells)
                                 {
-                                    pdfTable.AddCell(!string.IsNullOrEmpty(Convert.ToString(cell.Value)) ? Convert.ToString(cell.Value) : "");    
+                                    if(cell.Visible)
+                                        if (!string.IsNullOrEmpty(Convert.ToString(cell.Value)))
+                                            pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));    
                                 }
                             }
 
@@ -291,6 +307,11 @@ namespace EntryExitCivy
                                 Document pdfDoc = new Document(PageSize.A4, 10f, 20f, 20f, 10f);
                                 PdfWriter.GetInstance(pdfDoc, stream);
                                 pdfDoc.Open();
+                                pdfDoc.Add(new Phrase("\n"));
+                                Paragraph p = new Paragraph("Danh sách nhập cảnh",fTitle);
+                                p.Alignment = Element.ALIGN_CENTER;
+                                pdfDoc.Add(p);
+                                pdfDoc.Add(new Phrase("\n"));
                                 pdfDoc.Add(pdfTable);
                                 pdfDoc.Close();
                                 stream.Close();
