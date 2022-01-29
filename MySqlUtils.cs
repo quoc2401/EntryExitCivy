@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "quoc2401";
+            password = "15082001";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database
@@ -139,9 +139,9 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void DeleteExit(string id)
+        public static void DeleteExit(string id, string depart_date)
         {
-            string query = "Delete from eedata.exit where civy_id = '" + id + "';";
+            string query = "Delete from eedata.exit where civy_id = '" + id + "' and depart_date = '" + depart_date + "';";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -150,9 +150,9 @@ namespace EntryExitCivy
             CloseConn();
         }
 
-        public static void DeleteEntry(string id)
+        public static void DeleteEntry(string id, string arrival_date)
         {
-            string query = "Delete from eedata.entry where civy_id = '" + id + "';";
+            string query = "Delete from eedata.entry where civy_id = '" + id + "' and arrival_date = '" + arrival_date + "';";
             if (OpenConn())
             {
                 MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -225,7 +225,10 @@ namespace EntryExitCivy
 
         public static void UpdateEntrys(DataTable changes)
         {
-            MySqlCommand cmd = new MySqlCommand("Select * from eedata.entry;", conn);
+            string query = "SELECT e.*, c.* " +
+                           "FROM eedata.entry e, eedata.civy c " +
+                           "WHERE civy_id = c.id;";
+            MySqlCommand cmd = new MySqlCommand(query, conn);
             MySqlDataAdapter mda = new MySqlDataAdapter();
             mda.SelectCommand = cmd;
             MySqlCommandBuilder mcb = new MySqlCommandBuilder(mda);

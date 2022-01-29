@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace EntryExitCivy
 {
@@ -164,6 +167,9 @@ namespace EntryExitCivy
                     MySqlUtils.AddNewCivy(c);
                     MySqlUtils.AddEntry(en);
                 }
+
+                var entrys = MySqlUtils.GetEntrys();
+                entryData.DataSource = entrys;
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
             }
             catch (MySqlException ex)
@@ -181,8 +187,14 @@ namespace EntryExitCivy
                 {
                     int selectedIndex = entryData.SelectedRows[i].Index;
                     string id = entryData[0, selectedIndex].Value.ToString();
-                    MySqlUtils.DeleteEntry(id);
+                    
+                    DateTime arrival_date = DateTime.Parse(entryData[2, selectedIndex].Value.ToString());
+                    string date = string.Format("{0:yyyy/MM/dd}", arrival_date);
+                    MySqlUtils.DeleteEntry(id, date);
                 }
+
+                var entrys = MySqlUtils.GetEntrys();
+                entryData.DataSource = entrys;
                 MessageBox.Show(text: "Xóa thành công!", caption: "Inform");
             }
             catch (MySqlException ex)
@@ -211,11 +223,81 @@ namespace EntryExitCivy
             rdbMale.Select();
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            if (entryData.Rows.Count > 0)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "PDF (*.pdf)|*.pdf";
+                sfd.FileName = "Entry.pdf";
+                bool fileError = false;
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    if (File.Exists(sfd.FileName))
+                    {
+                        try
+                        {
+                            File.Delete(sfd.FileName);
+                        }
+                        catch (IOException ex)
+                        {
+                            fileError = true;
+                            MessageBox.Show("Không thể tạo file!" + ex.Message, "Error");
+                        }
+                    }
+                    if (!fileError)
+                    {
+                        try
+                        {
+                            PdfPTable pdfTable = new PdfPTable(entryData.Columns.Count);
+                            pdfTable.DefaultCell.Padding = 3;
+                            pdfTable.WidthPercentage = 100;
+                            pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
+
+                            foreach (DataGridViewColumn column in entryData.Columns)
+                            {
+                                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
+                                pdfTable.AddCell(cell);
+                            }
+
+                            foreach (DataGridViewRow row in entryData.Rows)
+                            {
+                                foreach (DataGridViewCell cell in row.Cells)
+                                {
+                                    pdfTable.AddCell(!string.IsNullOrEmpty(Convert.ToString(cell.Value)) ? Convert.ToString(cell.Value) : "");    
+                                }
+                            }
+
+                            //exporting to PDF
+                            using (FileStream stream = new FileStream(sfd.FileName, FileMode.Create))
+                            {
+                                Document pdfDoc = new Document(PageSize.A4, 10f, 20f, 20f, 10f);
+                                PdfWriter.GetInstance(pdfDoc, stream);
+                                pdfDoc.Open();
+                                pdfDoc.Add(pdfTable);
+                                pdfDoc.Close();
+                                stream.Close();
+                            }
+
+                            MessageBox.Show("Xuất PDF thành công!", "Inform");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Error");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không có dữ liệu để xuất!", "Inform");
+            }  
+        }
 
         //phần datagridview
         private void entryData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
-            entryData.ClearSelection();        
+            entryData.ClearSelection(); 
         }
 
         private void entryData_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -319,6 +401,7 @@ namespace EntryExitCivy
         {
             Utils.RemovePlaceholder((TextBox)sender);
         }
+
     }
 
 }
