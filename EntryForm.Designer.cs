@@ -31,8 +31,10 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.cbPurpose = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbNationality = new System.Windows.Forms.ComboBox();
+            this.txtExpectedDestination = new System.Windows.Forms.TextBox();
             this.dtpPassportExpire = new System.Windows.Forms.DateTimePicker();
+            this.txtOccupation = new System.Windows.Forms.TextBox();
+            this.cbNationality = new System.Windows.Forms.ComboBox();
             this.dtpVisaExpire = new System.Windows.Forms.DateTimePicker();
             this.dtpArrivalDate = new System.Windows.Forms.DateTimePicker();
             this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
@@ -52,8 +54,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtOccupation = new System.Windows.Forms.TextBox();
-            this.txtExpectedDestination = new System.Windows.Forms.TextBox();
             this.txtPassport = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -67,6 +67,7 @@
             this.miEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miNation = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbGender.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.entryData)).BeginInit();
@@ -76,7 +77,7 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(139, 187);
+            this.txtAddress.Location = new System.Drawing.Point(149, 187);
             this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
@@ -97,10 +98,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtExpectedDestination);
+            this.groupBox1.Controls.Add(this.dtpPassportExpire);
+            this.groupBox1.Controls.Add(this.txtOccupation);
             this.groupBox1.Controls.Add(this.txtAddress);
             this.groupBox1.Controls.Add(this.cbPurpose);
             this.groupBox1.Controls.Add(this.cbNationality);
-            this.groupBox1.Controls.Add(this.dtpPassportExpire);
             this.groupBox1.Controls.Add(this.dtpVisaExpire);
             this.groupBox1.Controls.Add(this.dtpArrivalDate);
             this.groupBox1.Controls.Add(this.dtpBirthday);
@@ -118,13 +121,11 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtOccupation);
-            this.groupBox1.Controls.Add(this.txtExpectedDestination);
             this.groupBox1.Controls.Add(this.txtPassport);
             this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(11, 30);
+            this.groupBox1.Location = new System.Drawing.Point(11, 63);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -132,6 +133,32 @@
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin nhập cảnh";
+            // 
+            // txtExpectedDestination
+            // 
+            this.txtExpectedDestination.Location = new System.Drawing.Point(579, 235);
+            this.txtExpectedDestination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtExpectedDestination.Name = "txtExpectedDestination";
+            this.txtExpectedDestination.Size = new System.Drawing.Size(178, 26);
+            this.txtExpectedDestination.TabIndex = 11;
+            this.txtExpectedDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDestination_KeyPress);
+            // 
+            // dtpPassportExpire
+            // 
+            this.dtpPassportExpire.Location = new System.Drawing.Point(149, 323);
+            this.dtpPassportExpire.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpPassportExpire.Name = "dtpPassportExpire";
+            this.dtpPassportExpire.Size = new System.Drawing.Size(272, 26);
+            this.dtpPassportExpire.TabIndex = 12;
+            // 
+            // txtOccupation
+            // 
+            this.txtOccupation.Location = new System.Drawing.Point(149, 140);
+            this.txtOccupation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtOccupation.Name = "txtOccupation";
+            this.txtOccupation.Size = new System.Drawing.Size(272, 26);
+            this.txtOccupation.TabIndex = 3;
+            this.txtOccupation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOccupation_KeyPress);
             // 
             // cbNationality
             // 
@@ -145,17 +172,9 @@
             this.cbNationality.Size = new System.Drawing.Size(178, 28);
             this.cbNationality.TabIndex = 8;
             // 
-            // dtpPassportExpire
-            // 
-            this.dtpPassportExpire.Location = new System.Drawing.Point(139, 324);
-            this.dtpPassportExpire.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpPassportExpire.Name = "dtpPassportExpire";
-            this.dtpPassportExpire.Size = new System.Drawing.Size(272, 26);
-            this.dtpPassportExpire.TabIndex = 12;
-            // 
             // dtpVisaExpire
             // 
-            this.dtpVisaExpire.Location = new System.Drawing.Point(139, 280);
+            this.dtpVisaExpire.Location = new System.Drawing.Point(149, 280);
             this.dtpVisaExpire.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpVisaExpire.Name = "dtpVisaExpire";
             this.dtpVisaExpire.Size = new System.Drawing.Size(272, 26);
@@ -163,7 +182,7 @@
             // 
             // dtpArrivalDate
             // 
-            this.dtpArrivalDate.Location = new System.Drawing.Point(139, 233);
+            this.dtpArrivalDate.Location = new System.Drawing.Point(149, 233);
             this.dtpArrivalDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpArrivalDate.Name = "dtpArrivalDate";
             this.dtpArrivalDate.Size = new System.Drawing.Size(272, 26);
@@ -173,7 +192,7 @@
             // 
             this.dtpBirthday.CustomFormat = "dd-MM-yyyy";
             this.dtpBirthday.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBirthday.Location = new System.Drawing.Point(139, 94);
+            this.dtpBirthday.Location = new System.Drawing.Point(149, 93);
             this.dtpBirthday.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(272, 26);
@@ -186,7 +205,7 @@
             this.gbGender.Location = new System.Drawing.Point(579, 53);
             this.gbGender.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbGender.Name = "gbGender";
-            this.gbGender.Size = new System.Drawing.Size(200, 22);
+            this.gbGender.Size = new System.Drawing.Size(178, 22);
             this.gbGender.TabIndex = 4;
             // 
             // rdbMale
@@ -218,7 +237,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(448, 54);
+            this.label2.Location = new System.Drawing.Point(444, 53);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 1;
@@ -228,7 +247,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(444, 237);
+            this.label9.Location = new System.Drawing.Point(442, 237);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(138, 20);
             this.label9.TabIndex = 1;
@@ -238,7 +257,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(444, 284);
+            this.label12.Location = new System.Drawing.Point(442, 285);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(85, 20);
             this.label12.TabIndex = 1;
@@ -298,7 +317,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(446, 143);
+            this.label5.Location = new System.Drawing.Point(444, 143);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 20);
             this.label5.TabIndex = 1;
@@ -308,7 +327,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(446, 98);
+            this.label13.Location = new System.Drawing.Point(444, 98);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(109, 20);
             this.label13.TabIndex = 1;
@@ -318,7 +337,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(446, 189);
+            this.label4.Location = new System.Drawing.Point(444, 189);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 20);
             this.label4.TabIndex = 1;
@@ -344,24 +363,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Họ tên:";
             // 
-            // txtOccupation
-            // 
-            this.txtOccupation.Location = new System.Drawing.Point(139, 140);
-            this.txtOccupation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtOccupation.Name = "txtOccupation";
-            this.txtOccupation.Size = new System.Drawing.Size(272, 26);
-            this.txtOccupation.TabIndex = 3;
-            this.txtOccupation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOccupation_KeyPress);
-            // 
-            // txtExpectedDestination
-            // 
-            this.txtExpectedDestination.Location = new System.Drawing.Point(579, 235);
-            this.txtExpectedDestination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtExpectedDestination.Name = "txtExpectedDestination";
-            this.txtExpectedDestination.Size = new System.Drawing.Size(183, 26);
-            this.txtExpectedDestination.TabIndex = 11;
-            this.txtExpectedDestination.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDestination_KeyPress);
-            // 
             // txtPassport
             // 
             this.txtPassport.Location = new System.Drawing.Point(579, 95);
@@ -382,7 +383,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(139, 51);
+            this.txtName.Location = new System.Drawing.Point(149, 51);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(272, 26);
@@ -393,7 +394,7 @@
             // 
             this.btnAdd.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(651, 432);
+            this.btnAdd.Location = new System.Drawing.Point(607, 485);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(132, 71);
             this.btnAdd.TabIndex = 23;
@@ -408,11 +409,11 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.entryData.BackgroundColor = System.Drawing.Color.DarkCyan;
             this.entryData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.entryData.Location = new System.Drawing.Point(796, 83);
+            this.entryData.Location = new System.Drawing.Point(796, 93);
             this.entryData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.entryData.Name = "entryData";
             this.entryData.RowTemplate.Height = 28;
-            this.entryData.Size = new System.Drawing.Size(496, 414);
+            this.entryData.Size = new System.Drawing.Size(570, 408);
             this.entryData.TabIndex = 34;
             this.entryData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.entryData_CellClick);
             this.entryData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.entryData_DataBindingComplete);
@@ -421,10 +422,10 @@
             // 
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtSearch.Location = new System.Drawing.Point(12, 8);
+            this.txtSearch.Location = new System.Drawing.Point(3, 8);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(384, 31);
+            this.txtSearch.Size = new System.Drawing.Size(449, 31);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.Text = " Số hộ chiếu...";
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
@@ -435,7 +436,7 @@
             // 
             this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(385, 8);
+            this.btnSearch.Location = new System.Drawing.Point(458, 8);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(107, 35);
             this.btnSearch.TabIndex = 28;
@@ -449,9 +450,9 @@
             this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.Location = new System.Drawing.Point(798, 38);
+            this.panel1.Location = new System.Drawing.Point(796, 38);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(556, 50);
+            this.panel1.Size = new System.Drawing.Size(570, 50);
             this.panel1.TabIndex = 29;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -459,7 +460,7 @@
             // 
             this.btnReset.BackColor = System.Drawing.Color.DarkCyan;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(501, 432);
+            this.btnReset.Location = new System.Drawing.Point(406, 485);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(132, 71);
             this.btnReset.TabIndex = 30;
@@ -475,7 +476,7 @@
             this.miNation});
             this.mnFuncs.Location = new System.Drawing.Point(0, 0);
             this.mnFuncs.Name = "mnFuncs";
-            this.mnFuncs.Size = new System.Drawing.Size(1303, 33);
+            this.mnFuncs.Size = new System.Drawing.Size(1378, 33);
             this.mnFuncs.TabIndex = 33;
             this.mnFuncs.Text = "Các chức năng";
             // 
@@ -501,16 +502,30 @@
             this.miNation.Text = "Danh sách quốc gia";
             this.miNation.Click += new System.EventHandler(this.miNation_Click);
             // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnExport.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Location = new System.Drawing.Point(984, 506);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(200, 50);
+            this.btnExport.TabIndex = 23;
+            this.btnExport.Text = "Export PDF";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // EntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1303, 508);
+            this.ClientSize = new System.Drawing.Size(1378, 584);
             this.Controls.Add(this.mnFuncs);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.entryData);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -573,6 +588,7 @@
         private System.Windows.Forms.ToolStripMenuItem miEntry;
         private System.Windows.Forms.ToolStripMenuItem miExit;
         private System.Windows.Forms.ToolStripMenuItem miNation;
+        private System.Windows.Forms.Button btnExport;
 
     }
 }
