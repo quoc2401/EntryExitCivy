@@ -32,12 +32,15 @@ namespace EntryExitCivy
             index.DataSource = data;
         }
 
+
         public static void Clear(GroupBox g)
         {
             foreach(var t in g.Controls.OfType<TextBox>())
                 t.Clear();
             foreach (var c in g.Controls.OfType<ComboBox>())
                 c.SelectedIndex = 0;
+            foreach (var d in g.Controls.OfType<DateTimePicker>())
+                d.Value = DateTime.Now;        
         }
 
         public static void FormatButtons(Form f)
@@ -124,3 +127,4 @@ namespace EntryExitCivy
         }
     }
 }
+

@@ -11,8 +11,6 @@ namespace EntryExitCivy
 {
     public partial class HomePage : Form
     {
-        int width = 1080;
-        int height = 540;
 
         public HomePage()
         {
@@ -24,11 +22,11 @@ namespace EntryExitCivy
 
         }
 
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             ExitForm exitform = new ExitForm();
             exitform.FormClosing += new FormClosingEventHandler(exitform_FormClosing);
-            exitform.Size = new Size(width, height);
             this.Hide();
             exitform.Show();
         }
@@ -42,7 +40,6 @@ namespace EntryExitCivy
         {
             EntryForm entryform = new EntryForm();
             entryform.FormClosing += new FormClosingEventHandler(entryform_FormClosing);
-            entryform.Size = new Size(width, height);
             this.Hide();
             entryform.Show();
         }
