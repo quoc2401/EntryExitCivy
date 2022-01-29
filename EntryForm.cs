@@ -245,10 +245,16 @@ namespace EntryExitCivy
             if (entryData.Rows.Count > 0)
             {
                 //Full path to the Unicode Arial file
-                string ARIALUNI_TFF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "ARIALUNI_0.TTF");
+                // This will get the current WORKING directory (i.e. \bin\Debug)
+                string workingDirectory = Environment.CurrentDirectory;
+
+                // This will get the current PROJECT directory
+                string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+                string ARIALUNI_TTF = Path.Combine(projectDirectory, "EntryExitCivy\\font\\ARIALUNI.TTF");
+
 
                 //Create a base font object making sure to specify IDENTITY-H
-                BaseFont bf = BaseFont.CreateFont(ARIALUNI_TFF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                BaseFont bf = BaseFont.CreateFont(ARIALUNI_TTF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
                 //Create a specific font object
                 var fTitle = new iTextSharp.text.Font(bf, 20, iTextSharp.text.Font.BOLD);
