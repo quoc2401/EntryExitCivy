@@ -55,12 +55,7 @@ namespace EntryExitCivy
                     
         private void EntryForm_Load(object sender, EventArgs e)
         {
-            var entrys = MySqlUtils.GetEntrys();
-            string[] selectedColumns = new[] { "civy_id", "fullname", "arrival_date", "expected_destination", "visa_expiration",
-                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
-                                               "phone", "home_address", "occupation"};
-            entrys = new DataView(entrys).ToTable(false, selectedColumns);
-            entryData.DataSource = entrys;
+            entryData.DataSource = Utils.SelectColumnEntry();
 
             //đổi tên cột
             entryData.Columns["civy_id"].HeaderText = "Số hộ chiếu";
@@ -156,21 +151,28 @@ namespace EntryExitCivy
                                     , expected_destination:expected_destination);
 
                 string exist = MySqlUtils.CivyExist(passport_no);
-          
+                DataTable result;
+
                 if (exist == passport_no)
                 {
 
-                    MySqlUtils.AddEntry(en);
+                    result = MySqlUtils.AddEntry(en);
                 }
                 else
                 {
                     MySqlUtils.AddNewCivy(c);
-                    MySqlUtils.AddEntry(en);
+                    result = MySqlUtils.AddEntry(en);
                 }
+                if (result != null)
+                    entryData.DataSource = result;
+                else
+                    entryData.DataSource = Utils.SelectColumnEntry();
 
-                var entrys = MySqlUtils.GetEntrys();
-                entryData.DataSource = entrys;
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
+
+                entryData.ClearSelection();
+                Utils.Clear(groupBox1);
+
             }
             catch (MySqlException ex)
             {
@@ -183,6 +185,8 @@ namespace EntryExitCivy
         {
             try
             {
+                DataTable result = new DataTable();
+
                 for (int i = 0; i < entryData.SelectedRows.Count; i++)
                 {
                     int selectedIndex = entryData.SelectedRows[i].Index;
@@ -190,17 +194,30 @@ namespace EntryExitCivy
                     
                     DateTime arrival_date = DateTime.Parse(entryData[2, selectedIndex].Value.ToString());
                     string date = string.Format("{0:yyyy/MM/dd}", arrival_date);
-                    MySqlUtils.DeleteEntry(id, date);
+                    result = MySqlUtils.DeleteEntry(id, date);
                 }
+                if (result != null)
+                    entryData.DataSource = result;
+                else
+                    entryData.DataSource = Utils.SelectColumnEntry();
 
-                var entrys = MySqlUtils.GetEntrys();
-                entryData.DataSource = entrys;
+                
                 MessageBox.Show(text: "Xóa thành công!", caption: "Inform");
+
+                entryData.ClearSelection();
+                Utils.Clear(groupBox1);
+                btnDelete.Hide();
+                btnEdit.Hide();
+                btnUnselect.Hide();
+
+                btnAdd.Show();
+                btnReset.Show();
+                rdbMale.Select();
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(text: ex.Message, caption: "Error");
-            } 
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)

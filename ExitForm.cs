@@ -53,13 +53,8 @@ namespace EntryExitCivy
         }
 
         private void ExitForm_Load(object sender, EventArgs e)
-        {
-            var exits = MySqlUtils.GetExits();     
-            string[] selectedColumns = new[] { "civy_id", "fullname", "depart_date", "destination", "visa_expiration",
-                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
-                                               "phone", "home_address", "occupation", "destination_id"};
-            exits = new DataView(exits).ToTable(false, selectedColumns);
-            exitData.DataSource = exits;
+        {     
+            exitData.DataSource = Utils.SelectColumnExit();
 
             //đổi tên cột
             exitData.Columns["civy_id"].HeaderText = "Số hộ chiếu";
@@ -158,21 +153,27 @@ namespace EntryExitCivy
                                     , passport_expiration: passport_expriration, purpose: purpose, destination: destination);
 
                 string exist = MySqlUtils.CivyExist(passport_no);
+                DataTable result;
 
                 if (exist == passport_no)
                 {
 
-                    MySqlUtils.AddExit(ex);
+                    result = MySqlUtils.AddExit(ex);
                 }
                 else
                 {
                     MySqlUtils.AddNewCivy(c);
-                    MySqlUtils.AddExit(ex);
+                    result = MySqlUtils.AddExit(ex);
                 }
+                if (result != null)
+                    exitData.DataSource = result;
+                else
+                    exitData.DataSource = Utils.SelectColumnExit();
 
-                var exits = MySqlUtils.GetExits();
-                exitData.DataSource = exits;
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
+                exitData.ClearSelection();
+                Utils.Clear(groupBox1);
+          
             }
             catch (MySqlException ex)
             {
@@ -185,6 +186,8 @@ namespace EntryExitCivy
         {
             try
             {
+                DataTable result = new DataTable();
+
                 for (int i = 0; i < exitData.SelectedRows.Count; i++)
                 {
                     int selectedIndex = exitData.SelectedRows[i].Index;
@@ -192,12 +195,24 @@ namespace EntryExitCivy
 
                     DateTime depart_date = DateTime.Parse(exitData[2, selectedIndex].Value.ToString());
                     string date = string.Format("{0:yyyy/MM/dd}", depart_date);
-                    MySqlUtils.DeleteExit(id, date);
+                    result = MySqlUtils.DeleteExit(id, date);
                 }
+                if (result != null)
+                    exitData.DataSource = result;
+                else
+                    exitData.DataSource = Utils.SelectColumnExit();
 
-                var exits = MySqlUtils.GetExits();
-                exitData.DataSource = exits;
-                MessageBox.Show(text: "Xóa thành công!", caption: "Inform");
+                MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
+
+                exitData.ClearSelection();
+                Utils.Clear(groupBox1);
+                btnDelete.Hide();
+                btnEdit.Hide();
+                btnUnselect.Hide();
+
+                btnAdd.Show();
+                btnReset.Show();
+                rdbMale.Select();
             }
             catch (MySqlException ex)
             {
