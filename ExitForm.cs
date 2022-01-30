@@ -53,6 +53,7 @@ namespace EntryExitCivy
             btnDelete.Hide();
         }
 
+
         private void ExitForm_Load(object sender, EventArgs e)
         {     
             exitData.DataSource = Utils.SelectColumnExit();
@@ -184,6 +185,7 @@ namespace EntryExitCivy
             }
         }
 
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -222,6 +224,7 @@ namespace EntryExitCivy
             } 
         }
 
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             Utils.Clear(groupBox1);
@@ -240,6 +243,7 @@ namespace EntryExitCivy
             exitData.ClearSelection();
             Utils.Clear(groupBox1);
         }
+
 
         private void btnExport_Click(object sender, EventArgs e)
         {

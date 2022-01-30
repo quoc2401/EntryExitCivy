@@ -53,7 +53,8 @@ namespace EntryExitCivy
             btnUnselect.Hide();
             btnDelete.Hide();
         }
-                    
+               
+     
         private void EntryForm_Load(object sender, EventArgs e)
         {
             entryData.DataSource = Utils.SelectColumnEntry();
@@ -183,6 +184,7 @@ namespace EntryExitCivy
             } 
         }
 
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -222,11 +224,13 @@ namespace EntryExitCivy
             }
         }
 
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             Utils.Clear(groupBox1);
             rdbMale.Select();
         }
+
 
         private void btnUnselect_Click(object sender, EventArgs e)
         {
@@ -241,6 +245,7 @@ namespace EntryExitCivy
             Utils.Clear(groupBox1);
             rdbMale.Select();
         }
+        
 
         private void btnExport_Click(object sender, EventArgs e)
         {
