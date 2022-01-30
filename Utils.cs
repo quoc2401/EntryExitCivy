@@ -125,6 +125,28 @@ namespace EntryExitCivy
                 t.Text = " Số hộ chiếu...";
             }
         }
+
+        public static DataTable SelectColumnExit()
+        {
+            string[] selectedColumns = new[] { "civy_id", "fullname", "depart_date", "destination", "visa_expiration",
+                                               "passport_expiration", "purpose", "id", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation", "destination_id"};
+            var exits = new DataView(MySqlUtils.GetExits()).ToTable(false, selectedColumns);
+
+            return exits;
+        }
+
+        public static DataTable SelectColumnEntry()
+        {
+            string[] selectedColumns = new[] { "civy_id", "fullname", "arrival_date", "expected_destination", "visa_expiration",
+                                               "passport_expiration", "purpose", "id", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation"};
+            var entrys = new DataView(MySqlUtils.GetEntrys()).ToTable(false, selectedColumns);
+
+            return entrys;
+        }
+
+
     }
 }
 

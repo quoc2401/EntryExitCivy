@@ -24,6 +24,7 @@ namespace EntryExitCivy
 
             btnEdit = new Button();
             btnEdit.Text = "Chỉnh sửa";
+            btnEdit.Click += new EventHandler(btnEdit_Click);
             btnEdit.Location = new Point(btnAdd.Location.X - 150, btnReset.Location.Y);
             btnEdit.Size = btnReset.Size;
             btnEdit.Padding = new Padding(3);
@@ -53,13 +54,8 @@ namespace EntryExitCivy
         }
 
         private void ExitForm_Load(object sender, EventArgs e)
-        {
-            var exits = MySqlUtils.GetExits();     
-            string[] selectedColumns = new[] { "civy_id", "fullname", "depart_date", "destination", "visa_expiration",
-                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
-                                               "phone", "home_address", "occupation", "destination_id"};
-            exits = new DataView(exits).ToTable(false, selectedColumns);
-            exitData.DataSource = exits;
+        {     
+            exitData.DataSource = Utils.SelectColumnExit();
 
             //đổi tên cột
             exitData.Columns["civy_id"].HeaderText = "Số hộ chiếu";
@@ -78,6 +74,7 @@ namespace EntryExitCivy
             exitData.Columns["home_address"].Visible = false;
             exitData.Columns["occupation"].Visible = false;
             exitData.Columns["destination_id"].Visible = false;
+            exitData.Columns["id"].Visible = false;
 
             //điều chỉnh chiều rộng cột
             exitData.Columns["civy_id"].Width = 100;
@@ -138,13 +135,13 @@ namespace EntryExitCivy
             try
             {
                 string passport_no = txtPassport.Text;
-                string name = txtName.Text;
+                string name = Utils.ChuanHoa(txtName.Text);
                 bool gender = rdbMale.Checked ? true : false;
                 DateTime birthday = dtpBirthday.Value;
                 string nationality = cbNationality.SelectedValue.ToString();
                 string phone = txtPhone.Text;
-                string address = txtAddress.Text;
-                string occupation = txtOccupation.Text;
+                string address = Utils.ChuanHoa(txtAddress.Text);
+                string occupation = Utils.ChuanHoa(txtOccupation.Text);
                 DateTime depart_date = dtpDepartDate.Value;
                 string destination = cbDestination.SelectedValue.ToString();
                 DateTime visa_expriration = dtpVisaExpire.Value;
@@ -158,21 +155,27 @@ namespace EntryExitCivy
                                     , passport_expiration: passport_expriration, purpose: purpose, destination: destination);
 
                 string exist = MySqlUtils.CivyExist(passport_no);
+                DataTable result;
 
                 if (exist == passport_no)
                 {
 
-                    MySqlUtils.AddExit(ex);
+                    result = MySqlUtils.AddExit(ex);
                 }
                 else
                 {
                     MySqlUtils.AddNewCivy(c);
-                    MySqlUtils.AddExit(ex);
+                    result = MySqlUtils.AddExit(ex);
                 }
+                if (result != null)
+                    exitData.DataSource = result;
+                else
+                    exitData.DataSource = Utils.SelectColumnExit();
 
-                var exits = MySqlUtils.GetExits();
-                exitData.DataSource = exits;
                 MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
+                exitData.ClearSelection();
+                Utils.Clear(groupBox1);
+          
             }
             catch (MySqlException ex)
             {
@@ -185,6 +188,8 @@ namespace EntryExitCivy
         {
             try
             {
+                DataTable result = new DataTable();
+
                 for (int i = 0; i < exitData.SelectedRows.Count; i++)
                 {
                     int selectedIndex = exitData.SelectedRows[i].Index;
@@ -192,12 +197,24 @@ namespace EntryExitCivy
 
                     DateTime depart_date = DateTime.Parse(exitData[2, selectedIndex].Value.ToString());
                     string date = string.Format("{0:yyyy/MM/dd}", depart_date);
-                    MySqlUtils.DeleteExit(id, date);
+                    result = MySqlUtils.DeleteExit(id, date);
                 }
+                if (result != null)
+                    exitData.DataSource = result;
+                else
+                    exitData.DataSource = Utils.SelectColumnExit();
 
-                var exits = MySqlUtils.GetExits();
-                exitData.DataSource = exits;
-                MessageBox.Show(text: "Xóa thành công!", caption: "Inform");
+                MessageBox.Show(text: "Thêm thành công!", caption: "Inform");
+
+                exitData.ClearSelection();
+                Utils.Clear(groupBox1);
+                btnDelete.Hide();
+                btnEdit.Hide();
+                btnUnselect.Hide();
+
+                btnAdd.Show();
+                btnReset.Show();
+                rdbMale.Select();
             }
             catch (MySqlException ex)
             {
@@ -224,29 +241,32 @@ namespace EntryExitCivy
             Utils.Clear(groupBox1);
         }
 
-
-        //phần datagridview
-        private void exitData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            exitData.ClearSelection();
-        }
-
-
         private void btnExport_Click(object sender, EventArgs e)
         {
             if (exitData.Rows.Count > 0)
             {
-                string ArialBold = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "VUARIAL.TTF");
-                BaseFont customfont = BaseFont.CreateFont(ArialBold, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                //Full path to the Unicode Arial file
+                // This will get the current WORKING directory (i.e. \bin\Debug)
+                string workingDirectory = Environment.CurrentDirectory;
 
-                var fTitle = new iTextSharp.text.Font(customfont, 20, iTextSharp.text.Font.BOLD);
-                var fHeader = new iTextSharp.text.Font(customfont, 10, iTextSharp.text.Font.BOLD);
-                var f = new iTextSharp.text.Font(customfont, 8, iTextSharp.text.Font.NORMAL);
+                // This will get the current PROJECT directory
+                string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+                string ARIALUNI_TTF = Path.Combine(projectDirectory, "EntryExitCivy\\font\\ARIALUNI.TTF");
+
+
+                //Create a base font object making sure to specify IDENTITY-H
+                BaseFont bf = BaseFont.CreateFont(ARIALUNI_TTF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                //Create a specific font object
+                var fTitle = new iTextSharp.text.Font(bf, 20, iTextSharp.text.Font.BOLD);
+                var fHeader = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.BOLD);
+                var f = new iTextSharp.text.Font(bf, 8, iTextSharp.text.Font.NORMAL);
 
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "PDF (*.pdf)|*.pdf";
                 sfd.FileName = "Exit.pdf";
                 bool fileError = false;
+
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     if (File.Exists(sfd.FileName))
@@ -269,7 +289,7 @@ namespace EntryExitCivy
                             pdfTable.DefaultCell.Padding = 3;
                             pdfTable.WidthPercentage = 100;
                             pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
-
+     
                             foreach (DataGridViewColumn column in exitData.Columns)
                             {
                                 if (column.Visible)
@@ -286,10 +306,8 @@ namespace EntryExitCivy
                                 foreach (DataGridViewCell cell in row.Cells)
                                 {
                                     if (cell.Visible)
-                                    {
-                                        if(!string.IsNullOrEmpty(Convert.ToString(cell.Value)))
+                                        if (!string.IsNullOrEmpty(Convert.ToString(cell.Value)))
                                             pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));
-                                    }
                                 }
                             }
 
@@ -321,9 +339,73 @@ namespace EntryExitCivy
             else
             {
                 MessageBox.Show("Không có dữ liệu để xuất!", "Inform");
-            }  
+            }
         }
 
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string passport_no = txtPassport.Text;
+                string name = Utils.ChuanHoa(txtName.Text);
+                bool gender = rdbMale.Checked ? true : false;
+                DateTime birthday = dtpBirthday.Value;
+                string nationality = cbNationality.SelectedValue.ToString();
+                string phone = txtPhone.Text;
+                string address = Utils.ChuanHoa(txtAddress.Text);
+                string occupation = Utils.ChuanHoa(txtOccupation.Text);
+                DateTime depart_date = dtpDepartDate.Value;
+                string destination = cbDestination.SelectedValue.ToString();
+                DateTime visa_expriration = dtpVisaExpire.Value;
+                DateTime passport_expriration = dtpPassportExpire.Value;
+                Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose), cbPurpose.Text, true);
+
+                Civy c = new Civy(id: passport_no, fullname: name, gender: gender, birthday: birthday
+                                 , nationality: nationality, phone: phone, home_address: address, occupation: occupation);
+
+                Exit ex = new Exit(civy_id: passport_no, depart_date: depart_date, visa_expiration: visa_expriration
+                                    , passport_expiration: passport_expriration, purpose: purpose, destination: destination);
+
+
+                DataTable result = MySqlUtils.UpdateExitCivy(c, ex);
+                if (result != null)
+                    exitData.DataSource = result;
+                else
+                    exitData.DataSource = Utils.SelectColumnExit();
+
+                MessageBox.Show(text: "Thông tin đã được cập nhật!", caption: "Inform");
+                exitData.ClearSelection();
+                Utils.Clear(groupBox1);
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(text: ex.Message, caption: "Error");
+                MySqlUtils.CloseConn();
+            }
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var result = MySqlUtils.SearchExit(txtSearch.Text);
+            exitData.DataSource = result;
+        }
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            var exit = Utils.SelectColumnExit();
+            exitData.DataSource = exit;
+        }
+
+
+        //phần datagridview
+        private void exitData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            exitData.ClearSelection();
+        }
 
         private void exitData_CellClick(object sender, DataGridViewCellEventArgs e)
         {

@@ -34,6 +34,7 @@
             this.txtExpectedDestination = new System.Windows.Forms.TextBox();
             this.txtOccupation = new System.Windows.Forms.TextBox();
             this.cbNationality = new System.Windows.Forms.ComboBox();
+            this.dtpPassportExpire = new System.Windows.Forms.DateTimePicker();
             this.dtpVisaExpire = new System.Windows.Forms.DateTimePicker();
             this.dtpArrivalDate = new System.Windows.Forms.DateTimePicker();
             this.dtpBirthday = new System.Windows.Forms.DateTimePicker();
@@ -67,7 +68,7 @@
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miNation = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExport = new System.Windows.Forms.Button();
-            this.dtpPassportExpire = new System.Windows.Forms.DateTimePicker();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbGender.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.entryData)).BeginInit();
@@ -163,6 +164,14 @@
             this.cbNationality.Name = "cbNationality";
             this.cbNationality.Size = new System.Drawing.Size(120, 21);
             this.cbNationality.TabIndex = 8;
+            // 
+            // dtpPassportExpire
+            // 
+            this.dtpPassportExpire.Location = new System.Drawing.Point(112, 208);
+            this.dtpPassportExpire.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpPassportExpire.Name = "dtpPassportExpire";
+            this.dtpPassportExpire.Size = new System.Drawing.Size(182, 20);
+            this.dtpPassportExpire.TabIndex = 10;
             // 
             // dtpVisaExpire
             // 
@@ -435,7 +444,7 @@
             this.txtSearch.Location = new System.Drawing.Point(2, 6);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(338, 23);
+            this.txtSearch.Size = new System.Drawing.Size(272, 23);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.Text = " Số hộ chiếu...";
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
@@ -448,13 +457,14 @@
             this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(344, 6);
+            this.btnSearch.Location = new System.Drawing.Point(278, 7);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(71, 23);
             this.btnSearch.TabIndex = 28;
             this.btnSearch.Text = "Tìm";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // panel1
             // 
@@ -463,6 +473,7 @@
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Location = new System.Drawing.Point(597, 31);
@@ -534,13 +545,20 @@
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
-            // dtpPassportExpire
+            // btnCancel
             // 
-            this.dtpPassportExpire.Location = new System.Drawing.Point(112, 208);
-            this.dtpPassportExpire.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpPassportExpire.Name = "dtpPassportExpire";
-            this.dtpPassportExpire.Size = new System.Drawing.Size(182, 20);
-            this.dtpPassportExpire.TabIndex = 10;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(353, 7);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(71, 23);
+            this.btnCancel.TabIndex = 28;
+            this.btnCancel.Text = "Hủy";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // EntryForm
             // 
@@ -616,6 +634,7 @@
         private System.Windows.Forms.ToolStripMenuItem miNation;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.DateTimePicker dtpPassportExpire;
+        private System.Windows.Forms.Button btnCancel;
 
     }
 }
