@@ -236,9 +236,16 @@ namespace EntryExitCivy
         {
             if (exitData.Rows.Count > 0)
             {
+                string ArialBold = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "VUARIAL.TTF");
+                BaseFont customfont = BaseFont.CreateFont(ArialBold, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+
+                var fTitle = new iTextSharp.text.Font(customfont, 20, iTextSharp.text.Font.BOLD);
+                var fHeader = new iTextSharp.text.Font(customfont, 10, iTextSharp.text.Font.BOLD);
+                var f = new iTextSharp.text.Font(customfont, 8, iTextSharp.text.Font.NORMAL);
+
                 SaveFileDialog sfd = new SaveFileDialog();
                 sfd.Filter = "PDF (*.pdf)|*.pdf";
-                sfd.FileName = "Entry.pdf";
+                sfd.FileName = "Exit.pdf";
                 bool fileError = false;
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
@@ -255,25 +262,34 @@ namespace EntryExitCivy
                         }
                     }
                     if (!fileError)
-                    {
+                    { 
                         try
                         {
-                            PdfPTable pdfTable = new PdfPTable(exitData.Columns.Count);
+                            PdfPTable pdfTable = new PdfPTable(7);
                             pdfTable.DefaultCell.Padding = 3;
                             pdfTable.WidthPercentage = 100;
                             pdfTable.HorizontalAlignment = Element.ALIGN_LEFT;
 
                             foreach (DataGridViewColumn column in exitData.Columns)
                             {
-                                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText));
-                                pdfTable.AddCell(cell);
+                                if (column.Visible)
+                                {
+                                    PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, fHeader));
+                                    cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                    cell.VerticalAlignment = PdfPCell.ALIGN_CENTER;
+                                    pdfTable.AddCell(cell);
+                                }
                             }
 
                             foreach (DataGridViewRow row in exitData.Rows)
                             {
                                 foreach (DataGridViewCell cell in row.Cells)
                                 {
-                                    pdfTable.AddCell(!string.IsNullOrEmpty(Convert.ToString(cell.Value)) ? Convert.ToString(cell.Value) : "");
+                                    if (cell.Visible)
+                                    {
+                                        if(!string.IsNullOrEmpty(Convert.ToString(cell.Value)))
+                                            pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));
+                                    }
                                 }
                             }
 
@@ -283,6 +299,11 @@ namespace EntryExitCivy
                                 Document pdfDoc = new Document(PageSize.A4, 10f, 20f, 20f, 10f);
                                 PdfWriter.GetInstance(pdfDoc, stream);
                                 pdfDoc.Open();
+                                pdfDoc.Add(new Phrase("\n"));
+                                Paragraph p = new Paragraph("Danh sách xuất cảnh", fTitle);
+                                p.Alignment = Element.ALIGN_CENTER;
+                                pdfDoc.Add(p);
+                                pdfDoc.Add(new Phrase("\n"));
                                 pdfDoc.Add(pdfTable);
                                 pdfDoc.Close();
                                 stream.Close();
