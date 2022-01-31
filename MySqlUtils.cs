@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "15082001";
+            password = "quoc2401";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database
@@ -246,23 +246,7 @@ namespace EntryExitCivy
             mda.Update(changes);
         }
 
-        public static DataTable GetEntryItems()
-        {
-            string query = "Select * from eedata.entry";
-            var entrys = new DataTable();
 
-            if (OpenConn())
-            {
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
-                mda.SelectCommand = cmd;
-                mda.Fill(entrys);
-                mda.Dispose();
-                cmd.Dispose();
-            }
-            CloseConn();
-            return entrys;
-        }
         public static DataTable GetExits()
         {
             string query = "SELECT civy_id, depart_date, n.name as 'destination', visa_expiration" +
@@ -291,24 +275,7 @@ namespace EntryExitCivy
             mda.UpdateCommand = mcb.GetUpdateCommand();
             mda.Update(changes);
         }
-
-        public static DataTable GetExitItems()
-        {
-            string query = "Select * from eedata.exit";
-            var exits = new DataTable();
-
-            if (OpenConn())
-            {
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
-                mda.SelectCommand = cmd;
-                mda.Fill(exits);
-                mda.Dispose();
-                cmd.Dispose();
-            }
-            CloseConn();
-            return exits;
-        }
+    
 
         public static DataTable UpdateEntryCivy(Civy c, Entry en)
         {
@@ -366,7 +333,7 @@ namespace EntryExitCivy
         {
             string query = "SELECT e.*, c.* " +
                            "FROM eedata.entry e, eedata.civy c " +
-                           "WHERE civy_id = id and civy_id like '%%" + passport + "%';";
+                           "WHERE civy_id = c.id and civy_id like '%%" + passport + "%';";
             var entry = new DataTable();
             if (OpenConn())
             {
@@ -376,14 +343,21 @@ namespace EntryExitCivy
                 mda.Dispose();
             }
             CloseConn();
-            return entry;
+
+            string[] selectedColumns = new[] { "civy_id", "fullname", "arrival_date", "expected_destination", "visa_expiration",
+                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation", "id"};
+            var entrys = new DataView(entry).ToTable(false, selectedColumns);
+
+            return entrys;
         }
 
         public static DataTable SearchExit(string passport)
         {
-            string query = "SELECT e.*, c.* " +
-                           "FROM eedata.exit e, eedata.civy c " +
-                           "WHERE civy_id = id and civy_id like '%%" + passport + "%';";
+            string query = "SELECT civy_id, depart_date, n.name as 'destination', visa_expiration" +
+                           ", passport_expiration, purpose, c.*, n.id as 'destination_id' " +
+                           "FROM eedata.exit e, eedata.civy c, eedata.nation n " +
+                           "WHERE civy_id = c.id and n.id = e.destination and civy_id like '%%" + passport + "%';";
             var exit = new DataTable();
             if (OpenConn())
             {
@@ -393,7 +367,13 @@ namespace EntryExitCivy
                 mda.Dispose();
             }
             CloseConn();
-            return exit;
+
+            string[] selectedColumns = new[] { "civy_id", "fullname", "depart_date", "destination", "visa_expiration",
+                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation", "destination_id", "id"};
+            var exits = new DataView(exit).ToTable(false, selectedColumns);
+
+            return exits;
         }
     }
 }
