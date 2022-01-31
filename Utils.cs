@@ -48,7 +48,7 @@ namespace EntryExitCivy
             foreach (var b in f.Controls.OfType<Button>())
             {
                 b.BackColor = Color.DarkCyan;
-                b.Size = new Size(110, 40);
+                b.Size = new Size(118, 55);
                 b.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
                 b.Cursor = Cursors.Hand;
             }
