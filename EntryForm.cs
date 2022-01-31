@@ -25,6 +25,7 @@ namespace EntryExitCivy
 
             btnEdit = new Button();
             btnEdit.Text = "Chỉnh sửa";
+            btnEdit.Click += new EventHandler(btnEdit_Click);
             btnEdit.Location = new Point(btnAdd.Location.X - 150, btnReset.Location.Y);
             btnEdit.Size = btnReset.Size;
             btnEdit.Padding = new Padding(3);
@@ -52,7 +53,8 @@ namespace EntryExitCivy
             btnUnselect.Hide();
             btnDelete.Hide();
         }
-                    
+               
+     
         private void EntryForm_Load(object sender, EventArgs e)
         {
             entryData.DataSource = Utils.SelectColumnEntry();
@@ -61,7 +63,7 @@ namespace EntryExitCivy
             entryData.Columns["civy_id"].HeaderText = "Số hộ chiếu";
             entryData.Columns["fullname"].HeaderText = "Họ tên";
             entryData.Columns["arrival_date"].HeaderText = "Ngày đến";
-            entryData.Columns["expected_destination"].HeaderText = "Nơi đến dự kiến ";
+            entryData.Columns["expected_destination"].HeaderText = "Nơi đến dự kiến";
             entryData.Columns["visa_expiration"].HeaderText = "Hạn visa";
             entryData.Columns["passport_expiration"].HeaderText = "Hạn hộ chiếu";
             entryData.Columns["purpose"].HeaderText = "Mục đích";
@@ -73,6 +75,7 @@ namespace EntryExitCivy
             entryData.Columns["phone"].Visible = false;
             entryData.Columns["home_address"].Visible = false;
             entryData.Columns["occupation"].Visible = false;
+            entryData.Columns["id"].Visible = false;
 
             //điều chỉnh chiều rộng cột
             entryData.Columns["civy_id"].Width = 100;
@@ -130,15 +133,15 @@ namespace EntryExitCivy
             try
             {
                 string passport_no = txtPassport.Text;
-                string name = txtName.Text;
+                string name = Utils.ChuanHoa(txtName.Text);
                 bool gender = rdbMale.Checked ? true : false;
                 DateTime birthday = dtpBirthday.Value;
                 string nationality = cbNationality.SelectedValue.ToString();
                 string phone = txtPhone.Text;
-                string address = txtAddress.Text;
-                string occupation = txtOccupation.Text;
+                string address = Utils.ChuanHoa(txtAddress.Text);
+                string occupation = Utils.ChuanHoa(txtOccupation.Text);
                 DateTime arrival_day = dtpArrivalDate.Value;
-                string expected_destination = txtExpectedDestination.Text;
+                string expected_destination = Utils.ChuanHoa(txtExpectedDestination.Text);
                 DateTime visa_expriration = dtpVisaExpire.Value;
                 DateTime passport_expriration = dtpPassportExpire.Value;
                 Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose),cbPurpose.Text, true);
@@ -181,6 +184,7 @@ namespace EntryExitCivy
             } 
         }
 
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -220,11 +224,13 @@ namespace EntryExitCivy
             }
         }
 
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             Utils.Clear(groupBox1);
             rdbMale.Select();
         }
+
 
         private void btnUnselect_Click(object sender, EventArgs e)
         {
@@ -239,6 +245,7 @@ namespace EntryExitCivy
             Utils.Clear(groupBox1);
             rdbMale.Select();
         }
+        
 
         private void btnExport_Click(object sender, EventArgs e)
         {
@@ -293,6 +300,8 @@ namespace EntryExitCivy
                                 if (column.Visible)
                                 {
                                     PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, fHeader));
+                                    cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                    cell.VerticalAlignment = PdfPCell.ALIGN_CENTER;
                                     pdfTable.AddCell(cell);
                                 }
                             }
@@ -303,7 +312,7 @@ namespace EntryExitCivy
                                 {
                                     if(cell.Visible)
                                         if (!string.IsNullOrEmpty(Convert.ToString(cell.Value)))
-                                            pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));    
+                                            pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));
                                 }
                             }
 
@@ -324,7 +333,7 @@ namespace EntryExitCivy
                             }
 
                             MessageBox.Show("Xuất PDF thành công!", "Inform");
-                        }
+                        }   
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message, "Error");
@@ -337,6 +346,66 @@ namespace EntryExitCivy
                 MessageBox.Show("Không có dữ liệu để xuất!", "Inform");
             }  
         }
+
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string passport_no = txtPassport.Text;
+                string name = Utils.ChuanHoa(txtName.Text);
+                bool gender = rdbMale.Checked ? true : false;
+                DateTime birthday = dtpBirthday.Value;
+                string nationality = cbNationality.SelectedValue.ToString();
+                string phone = txtPhone.Text;
+                string address = Utils.ChuanHoa(txtAddress.Text);
+                string occupation = Utils.ChuanHoa(txtOccupation.Text);
+                DateTime arrival_day = dtpArrivalDate.Value;
+                string expected_destination = Utils.ChuanHoa(txtExpectedDestination.Text);
+                DateTime visa_expriration = dtpVisaExpire.Value;
+                DateTime passport_expriration = dtpPassportExpire.Value;
+                Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose), cbPurpose.Text, true);
+
+                Civy c = new Civy(id: passport_no, fullname: name, gender: gender, birthday: birthday
+                                 , nationality: nationality, phone: phone, home_address: address, occupation: occupation);
+
+                Entry en = new Entry(civy_id: passport_no, arrival_date: arrival_day, visa_expiration: visa_expriration
+                                    , passport_expiration: passport_expriration, purpose: purpose
+                                    , expected_destination: expected_destination);
+
+                DataTable result = MySqlUtils.UpdateEntryCivy(c, en);
+                if (result != null)
+                    entryData.DataSource = result;
+                else
+                    entryData.DataSource = Utils.SelectColumnEntry();
+
+                MessageBox.Show(text: "Thông tin đã được cập nhật!", caption: "Inform");
+
+                entryData.ClearSelection();
+                Utils.Clear(groupBox1);
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(text: ex.Message, caption: "Error");
+                MySqlUtils.CloseConn();
+            }
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var result = MySqlUtils.SearchEntry(txtSearch.Text);
+            entryData.DataSource = result;
+        }
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            var entry = Utils.SelectColumnEntry();
+            entryData.DataSource = entry;
+        }
+
 
         //phần datagridview
         private void entryData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
