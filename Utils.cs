@@ -48,7 +48,7 @@ namespace EntryExitCivy
             foreach (var b in f.Controls.OfType<Button>())
             {
                 b.BackColor = Color.DarkCyan;
-                b.Size = new Size(110, 40);
+                b.Size = new Size(118, 55);
                 b.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
                 b.Cursor = Cursors.Hand;
             }
@@ -129,8 +129,8 @@ namespace EntryExitCivy
         public static DataTable SelectColumnExit()
         {
             string[] selectedColumns = new[] { "civy_id", "fullname", "depart_date", "destination", "visa_expiration",
-                                               "passport_expiration", "purpose", "id", "nationality", "gender", "birthday",
-                                               "phone", "home_address", "occupation", "destination_id"};
+                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation", "destination_id", "id"};
             var exits = new DataView(MySqlUtils.GetExits()).ToTable(false, selectedColumns);
 
             return exits;
@@ -139,8 +139,8 @@ namespace EntryExitCivy
         public static DataTable SelectColumnEntry()
         {
             string[] selectedColumns = new[] { "civy_id", "fullname", "arrival_date", "expected_destination", "visa_expiration",
-                                               "passport_expiration", "purpose", "id", "nationality", "gender", "birthday",
-                                               "phone", "home_address", "occupation"};
+                                               "passport_expiration", "purpose", "nationality", "gender", "birthday",
+                                               "phone", "home_address", "occupation", "id"};
             var entrys = new DataView(MySqlUtils.GetEntrys()).ToTable(false, selectedColumns);
 
             return entrys;

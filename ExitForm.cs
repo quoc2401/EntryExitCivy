@@ -51,6 +51,7 @@ namespace EntryExitCivy
             btnEdit.Hide();
             btnUnselect.Hide();
             btnDelete.Hide();
+            btnCancel.Hide();
         }
 
 
@@ -379,9 +380,9 @@ namespace EntryExitCivy
                     exitData.DataSource = Utils.SelectColumnExit();
 
                 MessageBox.Show(text: "Thông tin đã được cập nhật!", caption: "Inform");
-                exitData.ClearSelection();
-                Utils.Clear(groupBox1);
-
+                txtSearch.Text = "";
+                Utils.AddPlaceholder(txtSearch);
+                btnCancel.Hide();
             }
             catch (MySqlException ex)
             {
@@ -395,6 +396,8 @@ namespace EntryExitCivy
         {
             var result = MySqlUtils.SearchExit(txtSearch.Text);
             exitData.DataSource = result;
+
+            btnCancel.Show();
         }
 
 
@@ -402,6 +405,10 @@ namespace EntryExitCivy
         {
             var exit = Utils.SelectColumnExit();
             exitData.DataSource = exit;
+
+            txtSearch.Text = "";
+            Utils.AddPlaceholder(txtSearch);
+            btnCancel.Hide();
         }
 
 
@@ -448,6 +455,7 @@ namespace EntryExitCivy
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Utils.Clear(groupBox1);
                 }
                 
             } 

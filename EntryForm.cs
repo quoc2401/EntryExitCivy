@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 using System.IO;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using System.Globalization;
 
 namespace EntryExitCivy
 {
@@ -52,6 +53,7 @@ namespace EntryExitCivy
             btnEdit.Hide();
             btnUnselect.Hide();
             btnDelete.Hide();
+            btnCancel.Hide();
         }
                
      
@@ -380,9 +382,9 @@ namespace EntryExitCivy
                     entryData.DataSource = Utils.SelectColumnEntry();
 
                 MessageBox.Show(text: "Thông tin đã được cập nhật!", caption: "Inform");
-
-                entryData.ClearSelection();
-                Utils.Clear(groupBox1);
+                txtSearch.Text = "";
+                Utils.AddPlaceholder(txtSearch);
+                btnCancel.Hide();
 
             }
             catch (MySqlException ex)
@@ -397,6 +399,8 @@ namespace EntryExitCivy
         {
             var result = MySqlUtils.SearchEntry(txtSearch.Text);
             entryData.DataSource = result;
+
+            btnCancel.Show();
         }
 
 
@@ -404,6 +408,9 @@ namespace EntryExitCivy
         {
             var entry = Utils.SelectColumnEntry();
             entryData.DataSource = entry;
+            txtSearch.Text = "";
+            Utils.AddPlaceholder(txtSearch);
+            btnCancel.Hide();
         }
 
 
@@ -451,6 +458,7 @@ namespace EntryExitCivy
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Utils.Clear(groupBox1);
                 }
 
             }
