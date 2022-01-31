@@ -24,6 +24,7 @@ namespace EntryExitCivy
 
             btnEdit = new Button();
             btnEdit.Text = "Chỉnh sửa";
+            btnEdit.Click += new EventHandler(btnEdit_Click);
             btnEdit.Location = new Point(btnAdd.Location.X - 150, btnReset.Location.Y);
             btnEdit.Size = btnReset.Size;
             btnEdit.Padding = new Padding(3);
@@ -52,6 +53,7 @@ namespace EntryExitCivy
             btnDelete.Hide();
         }
 
+
         private void ExitForm_Load(object sender, EventArgs e)
         {     
             exitData.DataSource = Utils.SelectColumnExit();
@@ -73,6 +75,7 @@ namespace EntryExitCivy
             exitData.Columns["home_address"].Visible = false;
             exitData.Columns["occupation"].Visible = false;
             exitData.Columns["destination_id"].Visible = false;
+            exitData.Columns["id"].Visible = false;
 
             //điều chỉnh chiều rộng cột
             exitData.Columns["civy_id"].Width = 100;
@@ -133,13 +136,13 @@ namespace EntryExitCivy
             try
             {
                 string passport_no = txtPassport.Text;
-                string name = txtName.Text;
+                string name = Utils.ChuanHoa(txtName.Text);
                 bool gender = rdbMale.Checked ? true : false;
                 DateTime birthday = dtpBirthday.Value;
                 string nationality = cbNationality.SelectedValue.ToString();
                 string phone = txtPhone.Text;
-                string address = txtAddress.Text;
-                string occupation = txtOccupation.Text;
+                string address = Utils.ChuanHoa(txtAddress.Text);
+                string occupation = Utils.ChuanHoa(txtOccupation.Text);
                 DateTime depart_date = dtpDepartDate.Value;
                 string destination = cbDestination.SelectedValue.ToString();
                 DateTime visa_expriration = dtpVisaExpire.Value;
@@ -182,6 +185,7 @@ namespace EntryExitCivy
             }
         }
 
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
@@ -220,6 +224,7 @@ namespace EntryExitCivy
             } 
         }
 
+
         private void btnReset_Click(object sender, EventArgs e)
         {
             Utils.Clear(groupBox1);
@@ -239,15 +244,22 @@ namespace EntryExitCivy
             Utils.Clear(groupBox1);
         }
 
+
         private void btnExport_Click(object sender, EventArgs e)
         {
             if (exitData.Rows.Count > 0)
             {
                 //Full path to the Unicode Arial file
-                string ARIALUNI_TFF = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "ARIALUNI_0.TTF");
+                // This will get the current WORKING directory (i.e. \bin\Debug)
+                string workingDirectory = Environment.CurrentDirectory;
+
+                // This will get the current PROJECT directory
+                string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+                string ARIALUNI_TTF = Path.Combine(projectDirectory, "EntryExitCivy\\font\\ARIALUNI.TTF");
+
 
                 //Create a base font object making sure to specify IDENTITY-H
-                BaseFont bf = BaseFont.CreateFont(ARIALUNI_TFF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+                BaseFont bf = BaseFont.CreateFont(ARIALUNI_TTF, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
                 //Create a specific font object
                 var fTitle = new iTextSharp.text.Font(bf, 20, iTextSharp.text.Font.BOLD);
@@ -274,7 +286,7 @@ namespace EntryExitCivy
                         }
                     }
                     if (!fileError)
-                    {
+                    { 
                         try
                         {
                             PdfPTable pdfTable = new PdfPTable(7);
@@ -287,6 +299,8 @@ namespace EntryExitCivy
                                 if (column.Visible)
                                 {
                                     PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, fHeader));
+                                    cell.HorizontalAlignment = PdfPCell.ALIGN_CENTER;
+                                    cell.VerticalAlignment = PdfPCell.ALIGN_CENTER;
                                     pdfTable.AddCell(cell);
                                 }
                             }
@@ -297,7 +311,7 @@ namespace EntryExitCivy
                                 {
                                     if (cell.Visible)
                                         if (!string.IsNullOrEmpty(Convert.ToString(cell.Value)))
-                                            pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));      
+                                            pdfTable.AddCell(new Phrase(Convert.ToString(cell.Value), f));
                                 }
                             }
 
@@ -308,7 +322,7 @@ namespace EntryExitCivy
                                 PdfWriter.GetInstance(pdfDoc, stream);
                                 pdfDoc.Open();
                                 pdfDoc.Add(new Phrase("\n"));
-                                Paragraph p = new Paragraph("Danh sách Xuất cảnh", fTitle);
+                                Paragraph p = new Paragraph("Danh sách xuất cảnh", fTitle);
                                 p.Alignment = Element.ALIGN_CENTER;
                                 pdfDoc.Add(p);
                                 pdfDoc.Add(new Phrase("\n"));
@@ -330,6 +344,64 @@ namespace EntryExitCivy
             {
                 MessageBox.Show("Không có dữ liệu để xuất!", "Inform");
             }
+        }
+
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string passport_no = txtPassport.Text;
+                string name = Utils.ChuanHoa(txtName.Text);
+                bool gender = rdbMale.Checked ? true : false;
+                DateTime birthday = dtpBirthday.Value;
+                string nationality = cbNationality.SelectedValue.ToString();
+                string phone = txtPhone.Text;
+                string address = Utils.ChuanHoa(txtAddress.Text);
+                string occupation = Utils.ChuanHoa(txtOccupation.Text);
+                DateTime depart_date = dtpDepartDate.Value;
+                string destination = cbDestination.SelectedValue.ToString();
+                DateTime visa_expriration = dtpVisaExpire.Value;
+                DateTime passport_expriration = dtpPassportExpire.Value;
+                Purpose purpose = (Purpose)Enum.Parse(typeof(Purpose), cbPurpose.Text, true);
+
+                Civy c = new Civy(id: passport_no, fullname: name, gender: gender, birthday: birthday
+                                 , nationality: nationality, phone: phone, home_address: address, occupation: occupation);
+
+                Exit ex = new Exit(civy_id: passport_no, depart_date: depart_date, visa_expiration: visa_expriration
+                                    , passport_expiration: passport_expriration, purpose: purpose, destination: destination);
+
+
+                DataTable result = MySqlUtils.UpdateExitCivy(c, ex);
+                if (result != null)
+                    exitData.DataSource = result;
+                else
+                    exitData.DataSource = Utils.SelectColumnExit();
+
+                MessageBox.Show(text: "Thông tin đã được cập nhật!", caption: "Inform");
+                exitData.ClearSelection();
+                Utils.Clear(groupBox1);
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(text: ex.Message, caption: "Error");
+                MySqlUtils.CloseConn();
+            }
+        }
+
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var result = MySqlUtils.SearchExit(txtSearch.Text);
+            exitData.DataSource = result;
+        }
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            var exit = Utils.SelectColumnExit();
+            exitData.DataSource = exit;
         }
 
 

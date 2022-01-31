@@ -29,7 +29,7 @@ namespace EntryExitCivy
             int port = 3306;
             database = "eedata";
             uid = "root";
-            password = "quoc2401";
+            password = "15082001";
 
             // Connection String.
             string connString = "Server=" + server + ";Database=" + database
@@ -308,6 +308,92 @@ namespace EntryExitCivy
             }
             CloseConn();
             return exits;
+        }
+
+        public static DataTable UpdateEntryCivy(Civy c, Entry en)
+        {
+            string queryCivy = "update eedata.civy " +
+                               "set id = '" + c.Id.ToString() + "', fullname = '" + c.Fullname + "', gender = '" + (c.Gender ? 1 : 0).ToString() +
+                               "', birthday = '" + c.Birthday.ToString("yyyy-MM-dd") + "', nationality = '" + c.Nationality + "', phone = '" + c.Phone +
+                               "', home_address = '" + c.Home_address + "', occupation = '" + c.Occupation + "' " +
+                               "where id = '" + c.Id.ToString() + "';";
+
+            string queryEntry = "update eedata.entry " +
+                                "set civy_id = '" + en.Civy_id.ToString() + "', arrival_date = '" +
+                                en.Arrival_date.ToString("yyyy-MM-dd") + "', expected_destination = '" + en.Expected_destination +
+                                "', visa_expiration = '" + en.Visa_expiration.ToString("yyyy-MM-dd") + 
+                                "', passport_expiration = '" + en.Passport_expiration.ToString("yyyy-MM-dd") + "', purpose = '" + en.Purpose.ToString() + "' " +
+                                "where civy_id = '" + en.Civy_id.ToString() + "';";
+            if (OpenConn())
+            {
+                MySqlCommand cmd1 = new MySqlCommand(queryCivy, conn);
+                cmd1.ExecuteNonQuery();
+                MySqlCommand cmd2 = new MySqlCommand(queryEntry, conn);
+                cmd2.ExecuteNonQuery();
+            }
+            DataTable entry = Utils.SelectColumnEntry();
+            CloseConn();
+            return entry;
+        }
+
+        public static DataTable UpdateExitCivy(Civy c, Exit e)
+        {
+            string queryCivy = "update eedata.civy " +
+                               "set id = '" + c.Id.ToString() + "', fullname = '" + c.Fullname + "', gender = '" + (c.Gender ? 1 : 0).ToString() +
+                               "', birthday = '" + c.Birthday.ToString("yyyy-MM-dd") + "', nationality = '" + c.Nationality + "', phone = '" + c.Phone +
+                               "', home_address = '" + c.Home_address + "', occupation = '" + c.Occupation + "' " +
+                               "where id = '" + c.Id.ToString() + "';";
+            string queryExit = "update eedata.exit " +
+                               "set civy_id = '" + e.Civy_id.ToString() + "', depart_date = '" + 
+                               e.Depart_date.ToString("yyyy-MM-dd") + "', destination = '" + e.Destination +
+                               "', visa_expiration = '" + e.Visa_expiration.ToString("yyyy-MM-dd") +
+                               "', passport_expiration = '" + e.Passport_expiration.ToString("yyyy-MM-dd") + "', purpose = '" + e.Purpose.ToString() + "' " +
+                               "where civy_id = '" + e.Civy_id.ToString() + "';";
+
+            if (OpenConn())
+            {
+                MySqlCommand cmd1 = new MySqlCommand(queryCivy, conn);
+                cmd1.ExecuteNonQuery();
+                MySqlCommand cmd2 = new MySqlCommand(queryExit, conn);
+                cmd2.ExecuteNonQuery();
+            }
+            DataTable exit = Utils.SelectColumnExit();
+            CloseConn();
+            return exit;
+        }
+
+        public static DataTable SearchEntry(string passport)
+        {
+            string query = "SELECT e.*, c.* " +
+                           "FROM eedata.entry e, eedata.civy c " +
+                           "WHERE civy_id = id and civy_id like '%%" + passport + "%';";
+            var entry = new DataTable();
+            if (OpenConn())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
+                mda.Fill(entry);
+                mda.Dispose();
+            }
+            CloseConn();
+            return entry;
+        }
+
+        public static DataTable SearchExit(string passport)
+        {
+            string query = "SELECT e.*, c.* " +
+                           "FROM eedata.exit e, eedata.civy c " +
+                           "WHERE civy_id = id and civy_id like '%%" + passport + "%';";
+            var exit = new DataTable();
+            if (OpenConn())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter mda = new MySqlDataAdapter(cmd);
+                mda.Fill(exit);
+                mda.Dispose();
+            }
+            CloseConn();
+            return exit;
         }
     }
 }

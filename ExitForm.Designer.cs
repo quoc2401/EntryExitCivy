@@ -68,6 +68,7 @@
             this.miExit = new System.Windows.Forms.ToolStripMenuItem();
             this.miNation = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbGender.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitData)).BeginInit();
@@ -104,19 +105,19 @@
             this.groupBox1.Controls.Add(this.txtPhone);
             this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(11, 63);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(8, 51);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(739, 319);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(554, 259);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin xuất cảnh";
             // 
             // txtOccupation
             // 
-            this.txtOccupation.Location = new System.Drawing.Point(140, 111);
-            this.txtOccupation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtOccupation.Location = new System.Drawing.Point(105, 90);
+            this.txtOccupation.Margin = new System.Windows.Forms.Padding(2);
             this.txtOccupation.Name = "txtOccupation";
             this.txtOccupation.Size = new System.Drawing.Size(245, 22);
             this.txtOccupation.TabIndex = 3;
@@ -124,8 +125,8 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(140, 148);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtAddress.Location = new System.Drawing.Point(105, 120);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(245, 22);
@@ -137,8 +138,8 @@
             this.cbPurpose.FormattingEnabled = true;
             this.cbPurpose.Items.AddRange(new object[] {
             "STUDY"});
-            this.cbPurpose.Location = new System.Drawing.Point(552, 228);
-            this.cbPurpose.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbPurpose.Location = new System.Drawing.Point(414, 185);
+            this.cbPurpose.Margin = new System.Windows.Forms.Padding(2);
             this.cbPurpose.Name = "cbPurpose";
             this.cbPurpose.Size = new System.Drawing.Size(167, 24);
             this.cbPurpose.TabIndex = 13;
@@ -149,8 +150,8 @@
             this.cbNationality.FormattingEnabled = true;
             this.cbNationality.Items.AddRange(new object[] {
             "VN"});
-            this.cbNationality.Location = new System.Drawing.Point(552, 148);
-            this.cbNationality.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbNationality.Location = new System.Drawing.Point(414, 120);
+            this.cbNationality.Margin = new System.Windows.Forms.Padding(2);
             this.cbNationality.Name = "cbNationality";
             this.cbNationality.Size = new System.Drawing.Size(167, 24);
             this.cbNationality.TabIndex = 8;
@@ -159,8 +160,8 @@
             // 
             this.dtpPassportExpire.CustomFormat = "dd-MM-yyyy";
             this.dtpPassportExpire.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpPassportExpire.Location = new System.Drawing.Point(140, 260);
-            this.dtpPassportExpire.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpPassportExpire.Location = new System.Drawing.Point(105, 211);
+            this.dtpPassportExpire.Margin = new System.Windows.Forms.Padding(2);
             this.dtpPassportExpire.Name = "dtpPassportExpire";
             this.dtpPassportExpire.Size = new System.Drawing.Size(245, 22);
             this.dtpPassportExpire.TabIndex = 12;
@@ -169,8 +170,8 @@
             // 
             this.dtpVisaExpire.CustomFormat = "dd-MM-yyyy";
             this.dtpVisaExpire.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpVisaExpire.Location = new System.Drawing.Point(140, 187);
-            this.dtpVisaExpire.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpVisaExpire.Location = new System.Drawing.Point(105, 152);
+            this.dtpVisaExpire.Margin = new System.Windows.Forms.Padding(2);
             this.dtpVisaExpire.Name = "dtpVisaExpire";
             this.dtpVisaExpire.Size = new System.Drawing.Size(245, 22);
             this.dtpVisaExpire.TabIndex = 10;
@@ -179,8 +180,8 @@
             // 
             this.dtpDepartDate.CustomFormat = "dd-MM-yyyy";
             this.dtpDepartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDepartDate.Location = new System.Drawing.Point(140, 224);
-            this.dtpDepartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpDepartDate.Location = new System.Drawing.Point(105, 182);
+            this.dtpDepartDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpDepartDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dtpDepartDate.Name = "dtpDepartDate";
             this.dtpDepartDate.Size = new System.Drawing.Size(245, 22);
@@ -190,8 +191,8 @@
             // 
             this.dtpBirthday.CustomFormat = "dd-MM-yyyy";
             this.dtpBirthday.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBirthday.Location = new System.Drawing.Point(140, 70);
-            this.dtpBirthday.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpBirthday.Location = new System.Drawing.Point(105, 57);
+            this.dtpBirthday.Margin = new System.Windows.Forms.Padding(2);
             this.dtpBirthday.Name = "dtpBirthday";
             this.dtpBirthday.Size = new System.Drawing.Size(245, 22);
             this.dtpBirthday.TabIndex = 1;
@@ -200,8 +201,8 @@
             // 
             this.gbGender.Controls.Add(this.rdbMale);
             this.gbGender.Controls.Add(this.rdbFemale);
-            this.gbGender.Location = new System.Drawing.Point(555, 41);
-            this.gbGender.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbGender.Location = new System.Drawing.Point(416, 33);
+            this.gbGender.Margin = new System.Windows.Forms.Padding(2);
             this.gbGender.Name = "gbGender";
             this.gbGender.Size = new System.Drawing.Size(165, 22);
             this.gbGender.TabIndex = 4;
@@ -210,8 +211,8 @@
             // 
             this.rdbMale.AutoSize = true;
             this.rdbMale.Checked = true;
-            this.rdbMale.Location = new System.Drawing.Point(15, -1);
-            this.rdbMale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbMale.Location = new System.Drawing.Point(11, -1);
+            this.rdbMale.Margin = new System.Windows.Forms.Padding(2);
             this.rdbMale.Name = "rdbMale";
             this.rdbMale.Size = new System.Drawing.Size(58, 21);
             this.rdbMale.TabIndex = 2;
@@ -222,8 +223,8 @@
             // rdbFemale
             // 
             this.rdbFemale.AutoSize = true;
-            this.rdbFemale.Location = new System.Drawing.Point(91, -1);
-            this.rdbFemale.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbFemale.Location = new System.Drawing.Point(68, -1);
+            this.rdbFemale.Margin = new System.Windows.Forms.Padding(2);
             this.rdbFemale.Name = "rdbFemale";
             this.rdbFemale.Size = new System.Drawing.Size(47, 21);
             this.rdbFemale.TabIndex = 3;
@@ -368,16 +369,16 @@
             this.cbDestination.Items.AddRange(new object[] {
             "VN",
             "VN"});
-            this.cbDestination.Location = new System.Drawing.Point(552, 191);
-            this.cbDestination.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbDestination.Location = new System.Drawing.Point(414, 155);
+            this.cbDestination.Margin = new System.Windows.Forms.Padding(2);
             this.cbDestination.Name = "cbDestination";
             this.cbDestination.Size = new System.Drawing.Size(167, 24);
             this.cbDestination.TabIndex = 14;
             // 
             // txtPassport
             // 
-            this.txtPassport.Location = new System.Drawing.Point(552, 74);
-            this.txtPassport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPassport.Location = new System.Drawing.Point(414, 60);
+            this.txtPassport.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassport.Name = "txtPassport";
             this.txtPassport.Size = new System.Drawing.Size(167, 22);
             this.txtPassport.TabIndex = 2;
@@ -385,8 +386,8 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(552, 111);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPhone.Location = new System.Drawing.Point(414, 90);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(167, 22);
             this.txtPhone.TabIndex = 4;
@@ -394,8 +395,8 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(140, 38);
-            this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtName.Location = new System.Drawing.Point(105, 29);
+            this.txtName.Margin = new System.Windows.Forms.Padding(2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(245, 22);
             this.txtName.TabIndex = 0;
@@ -405,8 +406,8 @@
             // 
             this.btnAdd.BackColor = System.Drawing.Color.DarkCyan;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(631, 402);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Location = new System.Drawing.Point(460, 362);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(117, 57);
             this.btnAdd.TabIndex = 14;
@@ -421,8 +422,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.exitData.BackgroundColor = System.Drawing.Color.DarkCyan;
             this.exitData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.exitData.Location = new System.Drawing.Point(796, 94);
-            this.exitData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.exitData.Location = new System.Drawing.Point(597, 76);
+            this.exitData.Margin = new System.Windows.Forms.Padding(2);
             this.exitData.Name = "exitData";
             this.exitData.RowHeadersWidth = 51;
             this.exitData.RowTemplate.Height = 28;
@@ -438,10 +439,11 @@
             this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.txtSearch);
+            this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.Location = new System.Drawing.Point(796, 38);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(597, 31);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(571, 45);
             this.panel1.TabIndex = 30;
@@ -456,7 +458,7 @@
             this.txtSearch.Location = new System.Drawing.Point(12, 7);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(440, 27);
+            this.txtSearch.Size = new System.Drawing.Size(273, 23);
             this.txtSearch.TabIndex = 27;
             this.txtSearch.Text = " Số hộ chiếu...";
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
@@ -469,20 +471,21 @@
             this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(459, 7);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSearch.Location = new System.Drawing.Point(279, 6);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(95, 28);
             this.btnSearch.TabIndex = 28;
             this.btnSearch.Text = "Tìm";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.DarkCyan;
             this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.Location = new System.Drawing.Point(465, 402);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnReset.Location = new System.Drawing.Point(327, 362);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(2);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(117, 57);
             this.btnReset.TabIndex = 31;
@@ -530,14 +533,29 @@
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.BackColor = System.Drawing.Color.DarkCyan;
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExport.Location = new System.Drawing.Point(1249, 409);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExport.Location = new System.Drawing.Point(738, 411);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(118, 55);
             this.btnExport.TabIndex = 33;
             this.btnExport.Text = "Xuất PDF";
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(354, 6);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(71, 23);
+            this.btnCancel.TabIndex = 28;
+            this.btnCancel.Text = "Hủy";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // ExitForm
             // 
@@ -552,7 +570,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.exitData);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ExitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý xuất cảnh";
@@ -613,6 +631,7 @@
         private System.Windows.Forms.ToolStripMenuItem miNation;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.ComboBox cbDestination;
+        private System.Windows.Forms.Button btnCancel;
 
     }
 }
